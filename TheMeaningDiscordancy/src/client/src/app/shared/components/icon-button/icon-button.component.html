@@ -1,0 +1,8 @@
+<button 
+    class="icon-button" 
+    [ngStyle]="getImageStyle()"
+    [disabled]="disabled"
+    [attr.title]="tooltip"
+    (click)="handleClick()">
+    {{label}}
+</button>

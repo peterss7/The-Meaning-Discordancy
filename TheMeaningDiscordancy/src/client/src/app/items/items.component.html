@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="content-wrapper">
+        <discord-item-table *ngIf="!modalService.modalData.isModalOpen" />
+        <div class="modal-wrapper" *ngIf="modalService.modalData.isModalOpen">
+            <discord-item-modal />
+        </div>
+        <discord-item-action-bar></discord-item-action-bar>
+    </div>
+</div>

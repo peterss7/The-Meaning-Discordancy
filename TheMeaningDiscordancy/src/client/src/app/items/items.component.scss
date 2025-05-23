@@ -1,0 +1,12 @@
+@import '../../styles.scss';
+
+.container {
+    @include column();
+    @include ez-bw(5px);    
+    // z-index: 500;
+
+    .content-wrapper{
+        @include column;
+        background-color: pink;        
+    }
+}

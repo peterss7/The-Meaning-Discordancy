@@ -1,0 +1,7 @@
+@mixin action-bar() {
+    @include row;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: .5rem;
+    padding-bottom: 0.5rem;
+}

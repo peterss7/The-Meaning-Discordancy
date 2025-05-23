@@ -1,0 +1,10 @@
+@import '../../../../styles.scss';
+
+discord-action-bar{
+    @include row;
+    @include ez-br(15px);
+
+    div{
+        flex: 1;
+    }
+}

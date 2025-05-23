@@ -1,0 +1,14 @@
+@import '../../../../styles.scss';
+
+.container {
+    @include flex-element;
+    @include ez-bg(4px);
+
+    .content{
+        @include flex-element;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 50%;
+        @include ez-bp(4px);
+    }
+}

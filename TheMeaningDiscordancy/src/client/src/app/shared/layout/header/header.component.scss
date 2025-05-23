@@ -1,0 +1,13 @@
+@import '../../../../styles.scss';
+
+.container {
+    @include column;
+
+    .header-text {
+        @include column;
+    }
+
+    .header-actions {
+        @include flex-element;
+    }
+}

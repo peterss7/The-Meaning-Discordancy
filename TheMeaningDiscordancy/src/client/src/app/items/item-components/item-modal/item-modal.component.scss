@@ -1,0 +1,8 @@
+@import '../../../../styles.scss';
+
+.container{    
+    margin-left: 15%;
+    @include column($justify: center);
+    @include ez-bw(2px);
+    background-color: rgb(91, 83, 84);
+}

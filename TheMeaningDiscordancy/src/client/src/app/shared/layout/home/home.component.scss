@@ -1,0 +1,28 @@
+@import '../../../../styles.scss';
+
+.container {
+    @include column;    
+   
+    .header-container {
+        @include row($height: 15vh);        
+    }
+
+    .center-row  {
+        @include row($height: 72vh, $width: 80vw);
+        @include ez-bw(2px);
+
+        discord-sidebar{
+            // @include row($height: 250px);
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            @include sizer(50%, 50%);
+            z-index: 50;
+        }
+    }
+
+    .footer-container {
+        @include row($height: 10vh);
+        // flex: 1;
+    }
+}

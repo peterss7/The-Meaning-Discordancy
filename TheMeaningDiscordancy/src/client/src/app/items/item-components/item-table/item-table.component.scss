@@ -1,0 +1,9 @@
+@import '../../../../styles.scss';
+
+* {
+    background: none;
+}
+
+.container {
+    @include image-box();
+}
