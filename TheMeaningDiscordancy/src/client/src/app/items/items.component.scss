@@ -1,0 +1,11 @@
+@import '../../styles.scss';
+
+.container {
+    @include flex-element($flex: 7);
+    @include ez-bw(1px);
+
+
+    .items-table-container {
+        @include row;
+    }
+}

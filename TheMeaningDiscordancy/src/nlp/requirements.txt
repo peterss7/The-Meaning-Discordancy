@@ -1,0 +1,13 @@
+flask
+flask_smorest
+python-dotenv
+sqlalchemy
+flask-sqlalchemy
+flask-jwt-extended
+passlib
+flask-migrate
+gunicorn
+sentence-transformers
+scikit-learn
+sqlalchemy 
+pyodbc

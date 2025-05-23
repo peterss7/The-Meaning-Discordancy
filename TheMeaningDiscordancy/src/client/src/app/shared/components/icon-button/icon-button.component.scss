@@ -1,0 +1,22 @@
+@import '../../../../styles.scss';
+
+.icon-button {
+    width: 140px;
+    height: 140px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: inset rgba(92, 90, 90, 0.185) -8px -8px;
+    font-size: 2rem;
+    color: rgba(188, 13, 194, 0.74);    
+    font-weight: 700;
+    text-shadow: 5px 5px 4px rgba(52, 226, 9, 0.795);
+    font-family:Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.icon-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    
+}

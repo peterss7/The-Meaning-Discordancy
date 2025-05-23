@@ -1,0 +1,14 @@
+@import '../../../../styles.scss';
+
+.container {
+    @include row;
+    @include ez-bp(3px);
+
+    .header-text {
+        @include column($flex: 7);
+    }
+
+    .header-actions {
+        @include flex-element;
+    }
+}

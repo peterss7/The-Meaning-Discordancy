@@ -1,0 +1,47 @@
+@import '../../../../styles.scss';
+
+.file-input {
+    display: none;
+}
+
+.modal-container {
+    @include row;
+    @include ez-br;
+
+    .inner-modal-container {
+        @include column($width: 95%, $align: start);
+        padding: 10%;
+        @include ez-br;
+        .upload-input-container {
+            @include column();
+            @include ez-br;
+            margin-top: 5%;
+
+            .upload-button-container {
+                @include row($justify: space-between);
+            }
+        }
+        .dialog-content{
+            @include column($align: left);
+            @include ez-bp;
+        }
+        // .text-input {
+        //     width: 100%;
+        //     background-color: transparent;
+
+        //     ::ng-deep .mat-form-field-flex {
+        //         background-color: #d81a1a;
+        //         border-radius: 8px;
+        //     }
+
+        //     input {
+        //         color: green;
+        //     }
+        // }
+
+
+        .action-buttons {
+            @include row($justify: space-between);
+        }
+    }
+}

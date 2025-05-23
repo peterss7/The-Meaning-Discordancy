@@ -1,0 +1,27 @@
+<div class="modal-container">
+    <div class="inner-modal-container">
+        <h mat-dialog-title>Enter Your Value</h>
+        <div class="upload-input-container">
+            <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+            <div class="upload-button-container">
+                {{filename }}
+                <button mat-mini-fab color="primary" class="upload-button" (click)="fileUpload.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="dialog-content">
+            <mat-dialog-content>
+                <label>I am Label</label>
+                <mat-form-field appearance="fill" class="text-input">
+                    <mat-label>Valuee</mat-label>
+                    <input matInput [(ngModel)]="userInput" />
+                </mat-form-field>
+            </mat-dialog-content>
+        </div>
+        <mat-dialog-actions class="action-buttons">
+            <button mat-button (click)="onCancel()">Cancel</button>
+            <button mat-flat-button color="primary" (click)="onOk()">OK</button>
+        </mat-dialog-actions>
+    </div>
+</div>

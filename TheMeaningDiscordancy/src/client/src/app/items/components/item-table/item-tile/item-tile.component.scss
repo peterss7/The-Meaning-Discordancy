@@ -1,0 +1,29 @@
+@import '../../../../../styles.scss';
+
+.container {
+    @include column($height: 100%, $width: auto);
+    @include ez-br;
+    max-height: 60vh;
+
+    .tile-body {
+        @include column;
+        @include ez-by(2px);
+
+        .name-text {
+            // @include flex-element($flex: 2);
+            max-height: 2rem;
+            justify-content: top;
+            margin-top: 1rem;
+            @include ez-bg;
+        }
+
+        .image-container {
+            flex: 4;
+            img {
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+
+    }
+}

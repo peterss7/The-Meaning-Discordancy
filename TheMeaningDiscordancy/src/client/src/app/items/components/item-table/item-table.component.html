@@ -1,0 +1,5 @@
+<div class="container" [ngStyle]="stylesService.getImageStyle('bg')">
+    <div *ngFor="let item of items">        
+        <discord-item-tile [item]="item" />
+    </div>
+</div>

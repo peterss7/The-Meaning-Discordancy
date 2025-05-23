@@ -1,0 +1,23 @@
+@mixin ez-by($weight: 1px) {
+    border: $weight solid yellow;
+}
+
+@mixin ez-br($weight: 1px) {
+    border: $weight solid red;
+}
+
+@mixin ez-bp($weight: 1px) {
+    border: $weight solid pink;
+}
+
+@mixin ez-bg($weight: 1px) {
+    border: $weight solid green;
+}
+
+@mixin ez-bw($weight: 1px) {
+    border: $weight solid white;
+}
+
+@mixin clickable {
+    cursor: pointer;
+}

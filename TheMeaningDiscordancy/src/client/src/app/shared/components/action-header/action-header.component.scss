@@ -1,0 +1,23 @@
+@import '../../../../styles.scss';
+
+.header-container {
+    @include row;
+    @include ez-bw;
+
+    .header-text {
+        @include row(3);
+        @include ez-bw;
+        justify-content: center;
+        background-color: gray;
+
+        h2 {
+            color: white;
+            background: none;
+        }
+    }
+
+    .header-actions {
+        @include flex-element;
+        @include center;
+    }
+}

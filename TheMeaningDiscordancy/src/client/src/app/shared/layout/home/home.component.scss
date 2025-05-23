@@ -1,0 +1,49 @@
+@import '../../../../styles.scss';
+
+.container {
+    @include flex-element;
+    background-color: black;
+
+    .inner-container {
+        @include column;
+        // padding: 1rem;
+        @include ez-by;
+
+        .header-container{
+            @include column($flex: 1);
+            @include ez-br;
+
+            discord-header{
+                width: 100%;                
+            }
+        }        
+
+        .center-row {
+            flex: 7;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            // height: 100%;
+
+            @include ez-bp(8px);
+
+            // .outlet-container {
+            //     flex: 7;
+            //     // width: 70vw;
+            //     height: 100%;
+            // }
+
+            // .sidebar-container {
+            //     // width: 30vw;
+            //     flex: 3;
+            //     height: 100%;
+
+
+            // }
+        }
+
+        .footer-container {
+            flex: 1;
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "client",
+  "version": "0.0.0",
+  "scripts": {
+    "clean": "rimraf dist .angular .storybook-static",
+    "fresh-start": "npm run clean && rmdir /s /q node_modules && del package-lock.json && npm install && npm run install:storybook && npm run build:all && npm run start:all",
+    "install:storybook": "npm install --save-dev @storybook/angular@7.6.16 @storybook/addon-essentials@7.6.16 @storybook/addon-interactions@7.6.16 @storybook/addon-docs@7.6.16 @storybook/blocks@7.6.16 @storybook/test@7.6.16 storybook@7.6.16",
+    "build:ng": "ng build",
+    "build:storybook": "ng run client:build-storybook",
+    "build:all": "npm run clean && npm ci && npm run build:ng && npm run build:storybook",
+    "start:ng": "ng serve -o --host the-meaning-discordancy.local --port 4200",
+    "start:storybook": "ng run client:storybook",
+    "start:all": "npm run ngcc && concurrently \"npm run start:ng\" \"npm run start:storybook\"",
+    "ngcc": "npx ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^15.0.0",
+    "@angular/cdk": "^15.2.9",
+    "@angular/common": "^15.0.0",
+    "@angular/compiler": "^15.0.0",
+    "@angular/core": "^15.0.0",
+    "@angular/forms": "^15.0.0",
+    "@angular/material": "^15.2.9",
+    "@angular/platform-browser": "^15.0.0",
+    "@angular/platform-browser-dynamic": "^15.0.0",
+    "@angular/router": "^15.0.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.12.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^15.0.4",
+    "@angular/cli": "~15.0.4",
+    "@angular/compiler-cli": "^15.0.0",
+    "@compodoc/compodoc": "^1.1.26",
+    "@storybook/addon-docs": "^7.6.16",
+    "@storybook/addon-essentials": "^7.6.16",
+    "@storybook/addon-interactions": "^7.6.16",
+    "@storybook/angular": "^7.6.16",
+    "@storybook/blocks": "^7.6.16",
+    "@storybook/test": "^7.6.16",
+    "concurrently": "^9.1.2",
+    "rimraf": "^6.0.1",
+    "storybook": "^7.6.16",
+    "typescript": "~4.9"
+  }
+}

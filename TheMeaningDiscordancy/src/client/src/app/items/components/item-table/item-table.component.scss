@@ -1,0 +1,34 @@
+@import '../../../../styles.scss';
+
+.container {
+    flex: 7;
+    display: flex;
+    width: 100%;
+
+    justify-content: center;
+    align-items: center;
+    // grid-template-columns: repeat(10, 1fr);    
+    // grid-template-rows: repeat(10, 1fr);
+    // aspect-ratio: 1 /1;
+
+    // width: 100%;
+    // max-width: 1450px;
+    // max-height: 95%;
+
+    // margin: auto;
+    // gap: 10px;
+
+    div{
+        flex: 1;
+    }
+    // .table-cell {
+    //     flex: 1;
+    //     // @include flex-element;
+    //     // @include sizer;
+    //     // border: 1px solid #999;
+
+    //     // discord-item-tile {
+    //     //     @include sizer;
+    //     // }
+    // }
+}

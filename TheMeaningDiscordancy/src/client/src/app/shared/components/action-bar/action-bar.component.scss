@@ -1,0 +1,9 @@
+@import '../../../../styles.scss';
+
+.container {
+    .row {
+        .row {
+            @include action-bar;
+        }
+    }
+}
