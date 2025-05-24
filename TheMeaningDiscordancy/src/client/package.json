@@ -8,7 +8,7 @@
     "build:ng": "ng build",
     "build:storybook": "ng run client:build-storybook",
     "build:all": "npm run clean && npm ci && npm run build:ng && npm run build:storybook",
-    "start:ng": "ng serve",
+    "start:ng": "ng serve -o",
     "start:storybook": "ng run client:storybook",
     "start:all": "npm run ngcc && concurrently \"npm run start:ng\" \"npm run start:storybook\"",
     "ngcc": "npx ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"

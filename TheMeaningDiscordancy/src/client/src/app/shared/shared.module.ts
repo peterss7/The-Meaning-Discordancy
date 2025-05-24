@@ -8,6 +8,7 @@ import { StylesService } from './services/styles.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -20,16 +21,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogModule,
   ],
   providers: [
     ModalService,
     NormalizeUrlPipe,
-    StylesService
+    StylesService,
   ],
   exports: [
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
   ]
 })
 export class SharedModule { }

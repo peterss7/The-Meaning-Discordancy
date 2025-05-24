@@ -2,7 +2,6 @@
 * {
   margin: 0px;
   padding: 0px;
-  background-color: black;
   overflow: hidden;
 }
 
@@ -13,6 +12,15 @@ h4,
 p,
 label {
   color: white;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 html, body {
