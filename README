@@ -42,7 +42,8 @@ This will start storybook for component testing, and the client application.
 
 ## Help
 
-Reload window. Unplug and plug back in. Etc.. 
+When the Python imports can not be resolved, check that the python interpreter is set
+to that of the python.exe in venv/scripts
 
 ## Authors
 
