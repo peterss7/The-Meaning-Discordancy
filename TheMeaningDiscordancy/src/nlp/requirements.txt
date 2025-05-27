@@ -9,5 +9,4 @@ flask-migrate
 gunicorn
 sentence-transformers
 scikit-learn
-sqlalchemy 
 pyodbc
