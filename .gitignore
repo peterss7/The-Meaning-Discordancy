@@ -366,3 +366,4 @@ FodyWeavers.xsd
 /TheMeaningDiscordancy/src/TheMeaningDiscordancy.Api/appsettings.local.json
 /TheMeaningDiscordancy/src/TheMeaningDiscordancy.Api/wwwroot/item
 /TheMeaningDiscordancy/src/nlp/venv
+/TheMeaningDiscordancy/src/nlp/README-Template.md
