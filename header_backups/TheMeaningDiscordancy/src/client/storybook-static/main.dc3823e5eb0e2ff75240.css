@@ -1,0 +1,46 @@
+﻿/*
+Copyright © 2025 Steven Peterson
+All rights reserved.  
+
+No part of this code may be copied, modified, distributed, or used  
+without explicit written permission from the author.
+
+For licensing inquiries or collaboration opportunities:
+
+GitHub: https://github.com/peterss7  
+LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
+*/
+
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+label {
+  color: white;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

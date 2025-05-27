@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="inner-container">
+        <div class="header-container">
+            <discord-header [title]="title" [subtitle]="subtitle" />
+        </div>
+        <div class="center-row">
+            <div class="outlet-container">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="sidebar-container">
+                <discord-sidebar />
+            </div>            
+        </div>
+        <div class="footer-container">
+            <discord-footer />
+        </div>
+    </div>
+</div>

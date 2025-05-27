@@ -38,7 +38,10 @@ $commentStyles = @{
     ".html" = "<!--" # handled specially
 }
 
-$ignoredDirs = @("venv", "node_modules", ".git", "dist", "build", ".vs", ".github")
+$ignoredDirs = @(
+    "venv", "node_modules", ".git", "dist", "build", ".vs", ".github",
+    ".storybook"
+)
 $backupDir = Join-Path (Get-Location) "header_backups"
 $restoreMode = $args -contains "--restore"
 

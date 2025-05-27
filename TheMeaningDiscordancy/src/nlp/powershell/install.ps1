@@ -11,7 +11,8 @@ if (-Not (Test-Path ".\venv")) {
 & .\venv\Scripts\Activate.ps1
 
 # Install dependencies
-Write-Host "Installing dependencies from requirements.txt..."
+Write-Host "📦 Installing dependencies..."
+pip install --upgrade pip
 pip install -r requirements.txt
 
 Write-Host "Install complete. Run the app with run.ps1"
