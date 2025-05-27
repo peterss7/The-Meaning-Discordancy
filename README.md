@@ -1,19 +1,24 @@
-Copyright © 2024 Steven Peterson  
+![Build](https://img.shields.io/badge/build-pending-lightgrey)
+![License](https://img.shields.io/badge/license-proprietary-red)
+
+Copyright © 2025 Steven Peterson  
 All rights reserved.
 
-This software and all associated materials are the exclusive intellectual property of the author.
+This software and all associated materials are the exclusive intellectual property of the author.  
 No part of this code may be copied, modified, distributed, or used without explicit written permission from the author.
 
-**This project is not licensed under an open-source license.**
-Creative Commons references included for informational purposes only.
+**Note:** This project is not licensed under an open-source license.  
+Creative Commons references may be included for informational purposes only.
 
 # The Meaning Discordancy
 
-An experimental game of emergent meaning.
+An experimental game of *emergent meaning*.
 
 ## Description
 
-This game will use NLP libraries to perform vector similarity calculations on player input as they take turns mainly tagging images. As the game progresses, themes emerge, and the players find themselves in a battle of idealogy where the winner must create their meaning more efficiently or lose. That's the idea anyway. That is quite a ways away.
+This game uses NLP libraries to perform vector similarity calculations on player input, primarily as players take turns tagging images. Over time, thematic structures emerge, and players find themselves in a battle of ideology — where winning means constructing meaning more efficiently than your opponent... or losing to theirs.
+
+That's the idea, anyway. It's a ways off, but that's the vision.
 
 ## Getting Started
 
@@ -21,51 +26,312 @@ This game will use NLP libraries to perform vector similarity calculations on pl
 
 * Program runs in docker.
 
+### NLP Similarity Evaluator Service
+* Python
+  - flask, flask_smorest, flask-jwt-extended
+  - flask-sqlalchemy, flask-migrate, sqlalchemy, pyodbc
+  - python-dotenv, gunicorn, passlib
+  - sentence-transformers, scikit-learn
+
+### TheMeaningDiscordancy API (C# Backend)
+* .NET / EF Core
+  - Microsoft.AspNetCore.Http.Abstractions
+  - Microsoft.EntityFrameworkCore.SqlServer + Tools + Abstractions
+  - Microsoft.Extensions.Logging / DependencyInjection.Abstractions
+
+### Angular Client
+* Angular Material
+* Storybook
+* Rimraf
+
 ### Installing
 
-* Currently, installation files are scattered and the docker commands to start and stop and create and delete docker containers are unimplemented.
-* To install front end, open ./src/client and execute npm run install:all, and npm run start:all
-* To install python backend, open ./src/nlp/powershell
+* Installation scripts are still under development.
+* Docker setup is not yet fully implemented.
+* Frontend:
+  ```bash
+  cd ./src/client
+  npm run install:all
+  npm run start:all
+* Python backend  
+  ```bash  
+  cd ./src/nlp/powershell  
+  ./install.ps1
 
-### Executing program
+### Executing 
 
 * NLP Similarity Service(./src/nlp/powershell)
 ```
 ./run.ps1
 ```
-This will start the nlp similarity evaluation service, and its resources.
+Starts the Flask-based NLP backend.
 * Angular Client(./src/client/)
 ```
 npm run start:all
 ```
-This will start storybook for component testing, and the client application.
+Starts both the client app and Storybook for component previews.
+
+## File Structure
+
+### The Discordancy Api
+
+<details>
+<summary>📁 (click to expand)</summary>
+
+```plaintext
+│       ├── TheMeaningDiscordancy.Api
+│       │   ├── Classes
+│       │   │   └── AppHostSettings.cs
+│       │   ├── DiscordApi
+│       │   │   ├── ConfigurationApiController.cs
+│       │   │   ├── ItemApiController.cs
+│       │   │   └── TagApiController.cs
+│       │   ├── Extensions
+│       │   │   └── StatupExtensions.cs
+│       │   ├── Program.cs
+│       │   ├── Properties
+│       │   │   └── launchSettings.json
+│       │   ├── TheMeaningDiscordancy.Api.csproj
+│       │   ├── appsettings.Development.json
+│       │   ├── appsettings.Local.json
+│       │   └── appsettings.json
+```
+</details>
+
+### The Discordancy Core Services
+> Where the business logic of entities is executed.
+
+<details>
+<summary>📁 (click to expand)</summary>
+
+```plaintext
+│       ├── TheMeaningDiscordancy.Core
+│       │   ├── CoreServices
+│       │   │   ├── CoreStartupExtensions.cs
+│       │   │   ├── Item
+│       │   │   │   ├── Configuration
+│       │   │   │   │   └── ItemConstants.cs
+│       │   │   │   ├── Extensions
+│       │   │   │   │   └── ItemStartupExtensions.cs
+│       │   │   │   ├── Mapping
+│       │   │   │   │   └── ItemProfile.cs
+│       │   │   │   ├── Models
+│       │   │   │   │   ├── Dtos
+│       │   │   │   │   │   ├── Create
+│       │   │   │   │   │   │   └── CreateItemDto.cs
+│       │   │   │   │   │   ├── ItemDto.cs
+│       │   │   │   │   │   └── Update
+│       │   │   │   │   │       └── ItemUpdateDto.cs
+│       │   │   │   │   ├── Entities
+│       │   │   │   │   │   └── ItemEfc.cs
+│       │   │   │   │   └── IItemMap.cs
+│       │   │   │   ├── Repositories
+│       │   │   │   │   ├── Interfaces
+│       │   │   │   │   │   └── IItemRepository.cs
+│       │   │   │   │   └── ItemRepository.cs
+│       │   │   │   └── Services
+│       │   │   │       ├── Interfaces
+│       │   │   │       │   ├── IItemMappingService.cs
+│       │   │   │       │   └── IItemService.cs
+│       │   │   │       ├── ItemMappingService.cs
+│       │   │   │       └── ItemService.cs
+│       │   │   ├── Tag
+│       │   │   │   ├── Configuration
+│       │   │   │   │   └── TagConstants.cs
+│       │   │   │   ├── Extensions
+│       │   │   │   │   └── TagStartupExtensions.cs
+│       │   │   │   ├── Mapping
+│       │   │   │   │   └── TagProfile.cs
+│       │   │   │   ├── Models
+│       │   │   │   │   ├── Dtos
+│       │   │   │   │   │   ├── Create
+│       │   │   │   │   │   │   └── CreateTagDto.cs
+│       │   │   │   │   │   └── TagDto.cs
+│       │   │   │   │   ├── Entities
+│       │   │   │   │   │   └── TagEfc.cs
+│       │   │   │   │   └── ITagMap.cs
+│       │   │   │   ├── Repositories
+│       │   │   │   │   ├── Interfaces
+│       │   │   │   │   │   └── ITagRepository.cs
+│       │   │   │   │   └── TagRepository.cs
+│       │   │   │   └── Services
+│       │   │   │       ├── Interfaces
+│       │   │   │       │   ├── ITagMappingService.cs
+│       │   │   │       │   └── ITagService.cs
+│       │   │   │       ├── TagMappingService.cs
+│       │   │   │       └── TagService.cs
+│       │   │   └── Utilities
+│       │   │       ├── Classes
+│       │   │       │   └── ImageData.cs
+│       │   │       ├── Extensions
+│       │   │       │   └── UtilityStartupExtensions.cs
+│       │   │       └── Services
+│       │   │           ├── ImageUtilityService.cs
+│       │   │           └── Interfaces
+│       │   │               └── IImageUtilityService.cs
+│       │   ├── DiscordContext.cs
+│       │   ├── Properties
+│       │   │   └── launchSettings.json
+│       │   ├── Results
+│       │   │   ├── DiscordError.cs
+│       │   │   ├── DiscordResult.cs
+│       │   │   └── Error.cs
+│       │   └── TheMeaningDiscordancy.Core.csproj
+```
+</details>
+
+### Discordancy Infrastructure
+Persistence/WIP
+<details>
+<summary>📁 (click to expand)</summary>
+
+```plaintext
+│       ├── TheMeaningDiscordancy.Infrastructure
+│       │   ├── Classes
+│       │   │   └── Interfaces
+│       │   │       └── IDiscordDataEntity.cs
+│       │   ├── Extensions
+│       │   │   └── PersistenceStartupExtensions.cs
+│       │   ├── Repositories
+│       │   │   ├── DiscordRepository.cs
+│       │   │   └── Interfaces
+│       │   │       └── IDiscordRepository.cs
+│       │   └── TheMeaningDiscordancy.Infrastructure.csproj
+```
+</details>
+
+### Angular Client
+Not displaying ts, scss, and html file for angular components to consolidate space. The are there.
+<details>
+<summary>📁 (click to expand)</summary>
+
+```plaintext
+│       ├── client
+│       │   ├── README.md
+│       │   ├── angular.json
+│       │   ├── documentation.json
+│       │   ├── package-lock.json
+│       │   ├── package.json
+│       │   ├── src
+│       │   │   ├── app
+│       │   │   │   ├── app-routing.module.ts
+│       │   │   │   ├── app.module.ts
+│       │   │   │   ├── constants
+│       │   │   │   │   └── discord-constants.contants.ts
+│       │   │   │   ├── core
+│       │   │   │   │   ├── core.module.ts
+│       │   │   │   │   ├── models
+│       │   │   │   │   │   └── config-data.model.ts
+│       │   │   │   │   └── services
+│       │   │   │   │       ├── client.service.ts
+│       │   │   │   │       └── config.service.ts
+│       │   │   │   ├── items
+│       │   │   │   │   ├── components
+│       │   │   │   │   │   ├── components.module.ts
+│       │   │   │   │   │   └── item-table
+│       │   │   │   │   │       ├── item-table.module.ts
+│       │   │   │   │   │       └── item-tile
+│       │   │   │   │   ├── items.module.ts
+│       │   │   │   │   ├── models
+│       │   │   │   │   │   └── item.model.ts
+│       │   │   │   │   └── services
+│       │   │   │   │       ├── item-styles.service.ts
+│       │   │   │   │       └── items.service.ts
+│       │   │   │   └── shared
+│       │   │   │       ├── components
+│       │   │   │       │   ├── action-bar
+│       │   │   │       │   ├── action-header
+│       │   │   │       │   ├── components.module.ts
+│       │   │   │       │   ├── file-upload
+│       │   │   │       │   ├── icon-button
+│       │   │   │       │   └── modal
+│       │   │   │       ├── layout
+│       │   │   │       │   ├── footer
+│       │   │   │       │   ├── header
+│       │   │   │       │   ├── home
+│       │   │   │       │   ├── layout.module.ts
+│       │   │   │       │   └── sidebar
+│       │   │   │       ├── models
+│       │   │   │       │   ├── config-data.model.ts
+│       │   │   │       │   └── modal-data.model.ts
+│       │   │   │       ├── pipes
+│       │   │   │       │   └── normalize-url.pipe.ts
+│       │   │   │       ├── services
+│       │   │   │       │   ├── modal.service.ts
+│       │   │   │       │   └── styles.service.ts
+│       │   │   │       └── shared.module.ts
+│       │   │   ├── assets
+│       │   │   ├── index.html
+│       │   │   ├── main.ts
+│       │   │   ├── stories
+│       │   │   ├── styles
+│       │   │   │   ├── main.scss
+│       │   │   │   └── mixins
+│       │   │   │       ├── _components.scss
+│       │   │   │       ├── _detail.scss
+│       │   │   │       ├── _layout.scss
+│       │   │   │       ├── components
+│       │   │   │       │   ├── _display-components.scss
+│       │   │   │       │   ├── _image-components.scss
+│       │   │   │       │   └── components.scss
+│       │   │   │       └── mixins.scss
+│       │   │   └── styles.scss
+│       │   ├── tsconfig.app.json
+│       │   └── tsconfig.json
+```
+</details>
+
+### NLP Similarity Evaluator Service
+Calculating scores by evaluating semergent similarities.
+<details>
+<summary>📁 (click to expand)</summary>
+
+```plaintext
+│       └── nlp
+│           ├── Dockerfile
+│           ├── __init__.py
+│           ├── app.py
+│           ├── powershell
+│           │   ├── install.ps1
+│           │   ├── reinstall.ps1
+│           │   └── run.ps1
+│           ├── requirements.txt
+│           ├── resources
+│           │   ├── __init__.py
+│           │   └── tag_resource.py
+│           └── schemas
+│               ├── __init__.py
+│               └── tag_schema.py
+```
+</details>
+
+## Utilities
+
+From project root:
+```bash
+.\AddHeaders.ps1               # Add copyright headers
+.\AddHeaders.ps1 --restore     # Undo last header run
+```
+These scripts automatically add or remove legal headers across code files, formatting the comment style based on file extension.
+Planned: --update functionality to refresh existing headers.
 
 ## Help
 
-When the Python imports can not be resolved, check that the python interpreter is set
-to that of the python.exe in venv/scripts
-
-## Authors
-
-Contributors names and contact info
-
-[Steven Peterson](https://www.linkedin.com/in/steven-peterson7405926/), view my linked in profile!
+If Python imports cannot be resolved, ensure that your interpreter points to:
+`./venv/Scripts/python.exe`
 
 ## Version History
 
 * 0.1
     * Initial Scaffold
 
-## License
-
-This software and all associated materials are the exclusive intellectual property of the author.
-No part of this code may be copied, modified, distributed, or used without explicit written permission from the author.
-
-**This project is not licensed under an open-source license.**
-Creative Commons references included for informational purposes only.
-
-
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
 TO-DO
+
+## Authors & Contact
+For licensing inquiries or collaboration opportunities:
+
+**Steven Peterson**  [LinkedIn →](https://www.linkedin.com/in/steven-peterson7405926/)  
+**TheMeaningDiscordancy** [Github →](https://github.com/peterss7/The-Meaning-Discordancy)  

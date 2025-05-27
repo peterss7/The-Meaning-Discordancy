@@ -1,8 +1,11 @@
-﻿Copyright © 2025 Steven Peterson
-All rights reserved.  
+﻿Copyright © 2025 Steven Peterson  
+All rights reserved.
 
-No part of this code may be copied, modified, distributed, or used  
-without explicit written permission from the author.
+This software and all associated materials are the exclusive intellectual property of the author.  
+No part of this code may be copied, modified, distributed, or used without explicit written permission from the author.
+
+**Note:** This project is not licensed under an open-source license.  
+Creative Commons references may be included for informational purposes only.
 
 For licensing inquiries or collaboration opportunities:
 

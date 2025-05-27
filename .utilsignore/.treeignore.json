@@ -1,0 +1,30 @@
+{
+  "exclude_dirs": [
+    ".git",
+    ".venv",
+    "node_modules",
+    "venv",
+    "storybook",
+    "storybook-static",
+    "bin",
+    "obj",
+    "wwwroot",
+    ".utilsignore",
+    "Migrations",
+    "Lib",
+    "Scripts",
+    "Include"
+  ],
+  "exclude_extensions": [
+    ".pdb",
+    ".dll",
+    ".log",
+    ".user",
+    ".png",
+    ".exe",
+    ".bat"
+  ],
+  "exclude_files": [
+    "README.md.bak"
+  ]
+}
