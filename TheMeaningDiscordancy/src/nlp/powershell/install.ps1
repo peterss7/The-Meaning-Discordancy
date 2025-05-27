@@ -1,4 +1,4 @@
-# Exit on error
+﻿# Exit on error
 $ErrorActionPreference = "Stop"
 
 # Create venv if it doesn't exist

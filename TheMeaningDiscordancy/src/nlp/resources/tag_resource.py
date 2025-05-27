@@ -1,93 +1,50 @@
-from flask import request, jsonify
 from flask.views import MethodView
-from marshmallow import Schema, fields
 from flask_smorest import Blueprint, abort
 
-from schemas import SingleTagSchema, TagSchema
-from schemas import TagChainSchema
-from services.tag_evaluator import TagEvaluatorService
+from schemas.tag_schema import TagSchema, TagCreateSchema
 
-ROUTE_TAG_GET = "/get"
 
-blp = Blueprint("tags", __name__, url_prefix="/tags")
-evaluator = TagEvaluatorService()
+blp = Blueprint("tags", __name__, description="Operations on tags")
 
-@blp.route(ROUTE_TAG_GET)
-class Tag(MethodView):
+# Fake example data
+TAGS = {
+    1: {"id": 1, "name": "order", "description": "Structure and law"},
+    2: {"id": 2, "name": "chaos", "description": "Entropy and disruption"},
+}
+NEXT_ID = 3
+
+
+@blp.route("/tag/<int:tag_id>")
+class TagResource(MethodView):
     @blp.response(200, TagSchema)
     def get(self, tag_id):
-        return tag_id
+        tag = TAGS.get(tag_id)
+
+        print(tag)
+
+        if not tag:
+            abort(404, message="Tag not found.")
+        return tag
 
 
-@blp.route("/evaluate-chain")
-class TagChain(MethodView):
-    @blp.arguments(TagChainSchema)
+@blp.route("/tag")
+class TagListResource(MethodView):
+    @blp.response(201, TagSchema)
+    @blp.arguments(TagCreateSchema)
     def post(self, data):
-        tags = data["tags"]
-        evaluations = evaluator.evaluation_chain(tags)
-        return {
-            "tags": tags,
-            "evaluations": evaluations,
-            "axes": [
-                "Sacred-Profane",
-                "Holy-Secular",
-                "Order-Chaos",
-                "Creation-Destruction",
-                "Unity-Division"
-            ]
-        }
+        print(data)
+        if not input:
+            abort(404, message="Input data was empty. Could not create Tag.")
 
-# --- Single Tag GET ---
+        global NEXT_ID
+        tag_id = NEXT_ID
+        NEXT_ID += 1
 
-@blp.route("/evaluation")
-class SingleTagResource(MethodView):
-    @blp.arguments(SingleTagSchema, location="query")
-    def get(self, args):
-        tag = args["tag"]
-        evaluation = evaluator.evaluation_tag(tag)
-        return {
-            "tag": tag,
-            "evaluation": evaluation,
-            "axes": [
-                "Sacred-Profane",
-                "Holy-Secular",
-                "Order-Chaos",
-                "Creation-Destruction",
-                "Unity-Division"
-            ]
-        }
+        tag = {"id": tag_id, **data}
+        TAGS[tag_id] = tag
 
-# --- Raw axis names ---
+        return tag
 
-@blp.route("/axes")
-class AxesResource(MethodView):
+    @blp.response(200, TagSchema(many=True))
     def get(self):
-        return {
-            "axes": [
-                "Sacred-Profane",
-                "Holy-Secular",
-                "Order-Chaos",
-                "Creation-Destruction",
-                "Unity-Division"
-            ]
-        }
-
-# --- Debug: Get similarity between two tags directly ---
-
-@blp.route("/compare")
-class CompareTagsResource(MethodView):
-    def get(self):
-        tag1 = request.args.get("tag1")
-        tag2 = request.args.get("tag2")
-
-        if not tag1 or not tag2:
-            abort(400, message="Both tag1 and tag2 must be provided.")
-
-        vecs = evaluator.model.encode([tag1, tag2])
-        similarity = float(evaluator.model.similarity_fct(vecs[0], vecs[1]))  # cosine by default
-
-        return {
-            "tag1": tag1,
-            "tag2": tag2,
-            "similarity": round(similarity, 4)
-        }
+        return [TAGS[item] for item in TAGS]
