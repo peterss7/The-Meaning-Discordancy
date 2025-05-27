@@ -311,6 +311,7 @@ From project root:
 ```bash
 .\AddHeaders.ps1               # Add copyright headers
 .\AddHeaders.ps1 --restore     # Undo last header run
+.\.treeignore\tree.py          # Get a visual on the indentation situation
 ```
 These scripts automatically add or remove legal headers across code files, formatting the comment style based on file extension.
 Planned: --update functionality to refresh existing headers.
