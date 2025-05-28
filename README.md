@@ -51,8 +51,7 @@ That's the idea, anyway. It's a ways off, but that's the vision.
 * Frontend:
   ```bash
   cd ./src/client
-  npm run install:all
-  npm run start:all
+  npm run install:all  
 * Python backend  
   ```bash  
   cd ./src/nlp/powershell  
