@@ -74,7 +74,7 @@ Starts both the client app and Storybook for component previews.
 ## File Structure
 
 ### The Discordancy Api
-
+> Controllers and entry point
 <details>
 <summary>📁 (click to expand)</summary>
 
@@ -181,7 +181,7 @@ Starts both the client app and Storybook for component previews.
 </details>
 
 ### Discordancy Infrastructure
-Persistence/WIP
+> Persistence/WIP
 <details>
 <summary>📁 (click to expand)</summary>
 
@@ -201,7 +201,7 @@ Persistence/WIP
 </details>
 
 ### Angular Client
-Not displaying ts, scss, and html file for angular components to consolidate space. The are there.
+> Not displaying ts, scss, and html file for angular components to consolidate space. The are there.
 <details>
 <summary>📁 (click to expand)</summary>
 
@@ -282,10 +282,10 @@ Not displaying ts, scss, and html file for angular components to consolidate spa
 </details>
 
 ### NLP Similarity Evaluator Service
-Calculating scores by evaluating semergent similarities.
+> Calculating scores by evaluating emergent similarities.
 <details>
 <summary>📁 (click to expand)</summary>
-
+  
 ```plaintext
 │       └── nlp
 │           ├── Dockerfile
