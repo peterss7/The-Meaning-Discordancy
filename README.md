@@ -14,7 +14,7 @@ Creative Commons references may be included for informational purposes only.
 
 An experimental game of *emergent meaning*.
 
-**The Meaning Discordancy** is a competitive language game where players turn units ifshape meaning along ideological spectrums—chaos/order, divine/physical, unity/division—to make their alignment dominant.
+**The Meaning Discordancy** is a competitive language game where players turn units of truth to shape meaning along ideological spectrums—chaos/order, divine/physical, unity/division—to make their alignment dominant.
 
 ## Description
 
