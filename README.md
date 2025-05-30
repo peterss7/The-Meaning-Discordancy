@@ -14,6 +14,8 @@ Creative Commons references may be included for informational purposes only.
 
 An experimental game of *emergent meaning*.
 
+**The Meaning Discordancy** is a competitive language game where players turn units ifshape meaning along ideological spectrums—chaos/order, divine/physical, unity/division—to make their alignment dominant.
+
 ## Description
 
 This game uses NLP libraries to perform vector similarity calculations on player input, primarily as players take turns tagging images. Over time, thematic structures emerge, and players find themselves in a battle of ideology — where winning means constructing meaning more efficiently than your opponent... or losing to theirs.
