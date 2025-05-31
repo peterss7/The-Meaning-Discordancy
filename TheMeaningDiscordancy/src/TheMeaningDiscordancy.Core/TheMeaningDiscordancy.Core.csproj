@@ -20,8 +20,4 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TheMeaningDiscordancy.Infrastructure\TheMeaningDiscordancy.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

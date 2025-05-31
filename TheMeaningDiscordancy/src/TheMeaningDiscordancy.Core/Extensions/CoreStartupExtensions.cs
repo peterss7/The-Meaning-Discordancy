@@ -13,7 +13,7 @@ using TheMeaningDiscordancy.Core.CoreServices.Item.Extensions;
 using TheMeaningDiscordancy.Core.CoreServices.Tag.Extensions;
 using TheMeaningDiscordancy.Core.CoreServices.Utilities.Extensions;
 
-namespace TheMeaningDiscordancy.Core.CoreServices;
+namespace TheMeaningDiscordancy.Core.Extensions;
 
 public static class CoreStartupExtensions
 {

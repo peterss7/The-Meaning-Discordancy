@@ -10,7 +10,7 @@
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 using System.ComponentModel.DataAnnotations;
-using TheMeaningDiscordancy.Infrastructure.Classes.Interfaces;
+using TheMeaningDiscordancy.Core.Classes.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.CoreServices.Tag.Models.Entities;
 

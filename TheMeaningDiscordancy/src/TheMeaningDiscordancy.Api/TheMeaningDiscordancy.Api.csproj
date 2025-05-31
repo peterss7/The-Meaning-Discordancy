@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheMeaningDiscordancy.Core\TheMeaningDiscordancy.Core.csproj" />
-    <ProjectReference Include="..\TheMeaningDiscordancy.Infrastructure\TheMeaningDiscordancy.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

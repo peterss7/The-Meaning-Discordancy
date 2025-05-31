@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMeaningDiscordancy.Api",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMeaningDiscordancy.Core", "TheMeaningDiscordancy\src\TheMeaningDiscordancy.Core\TheMeaningDiscordancy.Core.csproj", "{4E5107C7-1220-4D11-AC06-72F539103003}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMeaningDiscordancy.Infrastructure", "TheMeaningDiscordancy\src\TheMeaningDiscordancy.Infrastructure\TheMeaningDiscordancy.Infrastructure.csproj", "{15B6DD3A-8661-43BD-82B2-CC8E6FD31015}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{4E5107C7-1220-4D11-AC06-72F539103003}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E5107C7-1220-4D11-AC06-72F539103003}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E5107C7-1220-4D11-AC06-72F539103003}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15B6DD3A-8661-43BD-82B2-CC8E6FD31015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15B6DD3A-8661-43BD-82B2-CC8E6FD31015}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15B6DD3A-8661-43BD-82B2-CC8E6FD31015}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15B6DD3A-8661-43BD-82B2-CC8E6FD31015}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

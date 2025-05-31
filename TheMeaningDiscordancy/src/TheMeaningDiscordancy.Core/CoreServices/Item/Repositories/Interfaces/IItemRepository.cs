@@ -10,7 +10,7 @@
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 using TheMeaningDiscordancy.Core.CoreServices.Item.Models.Entities;
-using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
+using TheMeaningDiscordancy.Core.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.CoreServices.Item.Repositories.Interfaces;
 

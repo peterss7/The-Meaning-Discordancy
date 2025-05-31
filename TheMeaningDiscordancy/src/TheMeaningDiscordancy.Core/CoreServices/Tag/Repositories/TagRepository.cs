@@ -12,7 +12,7 @@
 using Microsoft.EntityFrameworkCore;
 using TheMeaningDiscordancy.Core.CoreServices.Tag.Models.Entities;
 using TheMeaningDiscordancy.Core.CoreServices.Tag.Repositories.Interfaces;
-using TheMeaningDiscordancy.Infrastructure;
+using TheMeaningDiscordancy.Core;
 
 namespace TheMeaningDiscordancy.Core.CoreServices.Tag.Repositories;
 

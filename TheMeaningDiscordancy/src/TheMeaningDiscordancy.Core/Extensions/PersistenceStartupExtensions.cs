@@ -9,11 +9,10 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-using Microsoft.Extensions.DependencyInjection;
-using TheMeaningDiscordancy.Infrastructure.Repositories;
-using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
+using TheMeaningDiscordancy.Core.Repositories;
+using TheMeaningDiscordancy.Core.Repositories.Interfaces;
 
-namespace TheMeaningDiscordancy.Infrastructure.Extensions;
+namespace TheMeaningDiscordancy.Core.Extensions;
 
 public static class PersistenceStartupExtensions
 {

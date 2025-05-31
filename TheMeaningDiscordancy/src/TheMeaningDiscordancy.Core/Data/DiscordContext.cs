@@ -13,11 +13,17 @@ using Microsoft.EntityFrameworkCore;
 using TheMeaningDiscordancy.Core.CoreServices.Item.Models.Entities;
 using TheMeaningDiscordancy.Core.CoreServices.Tag.Models.Entities;
 
-namespace TheMeaningDiscordancy.Infrastructure;
+namespace TheMeaningDiscordancy.Core;
 
 public class DiscordContext : DbContext
 {
-    public DiscordContext(DbContextOptions<DiscordContext> options) : base(options) { }
+    public DiscordContext(DbContextOptions<DiscordContext> options) : base(options)
+    {
+        if (options is null)
+        {
+            throw new ArgumentNullException(nameof(options));
+        }
+    }
 
     public DbSet<ItemEfc> Items { get; set; }
     public DbSet<TagEfc> Tags { get; set; }
