@@ -9,14 +9,15 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
-public interface IDiscordRepository<T> where T : class
+using System.ComponentModel.DataAnnotations;
+using TheMeaningDiscordancy.Core.Classes.Interfaces;
+
+namespace TheMeaningDiscordancy.Infrastructure.Models.Entities;
+
+public class TagEfc : IDiscordDataEntity
 {
-    Task<T> GetAsync(int id);
-    Task<List<T>> GetAllAsync();
-    Task CreateAsync(T entity);
-    Task CreateAsync(List<T> entities);
-    void Update(T entity);
-    void Delete(T entity);
-    Task SaveChangesAsync();
+    [Key]
+    public Guid ObjectKey { get; set; }
+    public int TagId { get; set; }
+    public string Name { get; set; } = "";
 }

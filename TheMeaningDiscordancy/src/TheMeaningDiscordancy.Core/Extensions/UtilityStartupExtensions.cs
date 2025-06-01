@@ -9,14 +9,20 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
+using TheMeaningDiscordancy.Core.Services;
+using TheMeaningDiscordancy.Core.Services.Interfaces;
+
 namespace TheMeaningDiscordancy.Core.Extensions;
 
-public static class CoreStartupExtensions
+public static class UtilityStartupExtensions
 {
-    public static void ConfigureCoreServices(this IServiceCollection services)
+    public static void ConfigureUtilityServices(this IServiceCollection services)
     {
-        services.ConfigureItemServices();
-        services.ConfigureTagServices();
-        services.ConfigureUtilityServices();
+        services.ConfigureServices();
+    }
+
+    private static void ConfigureServices(this IServiceCollection services)
+    {
+        services.AddScoped<IImageUtilityService, ImageUtilityService>();
     }
 }

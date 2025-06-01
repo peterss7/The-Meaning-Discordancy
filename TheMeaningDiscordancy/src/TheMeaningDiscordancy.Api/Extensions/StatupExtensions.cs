@@ -10,8 +10,9 @@
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 using Microsoft.EntityFrameworkCore;
-using TheMeaningDiscordancy.Core;
 using TheMeaningDiscordancy.Core.Extensions;
+using TheMeaningDiscordancy.Infrastructure;
+using TheMeaningDiscordancy.Infrastructure.Extensions;
 
 namespace TheMeaningDiscordancy.Api.Extensions;
 
