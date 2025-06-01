@@ -5,6 +5,6 @@ namespace TheMeaningDiscordancy.Core.Services.Interfaces;
 
 public interface ITagMappingService
 {
-    void MapDtoToEntity<TDto, TEntity>(TDto dto, TagEfc entity)
+    void MapDtoToEntity<TDto>(TDto dto, TagEfc entity)
         where TDto : ITagMap;
 }

@@ -20,11 +20,11 @@ namespace TheMeaningDiscordancy.Core.Services;
 public class TagService : ITagService
 {
     private readonly ITagRepository _tagRepository;
-    private readonly ITagMappingService _mapper;
+    private readonly IDiscordMappingService _mapper;
     private readonly ILogger<TagService> _logger;
 
     public TagService(ITagRepository tagRepository,
-        ITagMappingService mapper,
+        IDiscordMappingService mapper,
         ILogger<TagService> logger)
     {
         _tagRepository = tagRepository;
@@ -72,7 +72,13 @@ public class TagService : ITagService
 
         try
         {
+            TagEfc tag = new TagEfc();
+            _mapper.MapDtoToEntity<TagDto, TagEfc>(inputDto, tag);
 
+            await _tagRepository.CreateAsync(tag);
+            await _tagRepository.SaveChangesAsync();
+
+            result.Value = tag;
         }
         catch (Exception ex)
         {

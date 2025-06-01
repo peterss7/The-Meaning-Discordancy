@@ -28,7 +28,7 @@ public class TagMappingService : ITagMappingService
         _logger = logger;
     }
 
-    public void MapDtoToEntity<TDto, TEntity>(TDto dto, TagEfc entity)
+    public void MapDtoToEntity<TDto>(TDto dto, TagEfc entity)
         where TDto : ITagMap
     {
         _mapper.Map(dto, entity);

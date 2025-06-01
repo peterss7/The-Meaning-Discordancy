@@ -103,21 +103,28 @@ public class TagApiController : Controller
     [ProducesResponseType(500)]
     public async Task<IActionResult> CreateTag([FromForm] CreateTagDto inputDto)
     {
+        DiscordResult<TagEfc> result = new DiscordResult<TagEfc>()
+            ;
         try
         {
             TagDto dto = new TagDto(inputDto);
-            DiscordResult<TagEfc> tagResult = await _tagService.CreateTagAsync(dto);
-            if (tagResult == null || tagResult.HasError)
+            result = await _tagService.CreateTagAsync(dto);
+            if (result == null) 
             {
-                return BadRequest(tagResult);
+                return BadRequest("The request result is null.");
+            }
+            
+            if (result.HasError)
+            {
+                return BadRequest(string.Join(", ", result.Errors.Select(x => x.Message)));
             }
 
-            if (tagResult.Value == null)
+            if (result.Value == null)
             {
-                return BadRequest("Tag result was null.");
+                return BadRequest("Request result  value was null.");
             }
 
-            return Ok(tagResult.Value);
+            return Ok(result.Value);
         }
         catch (Exception ex)
         {

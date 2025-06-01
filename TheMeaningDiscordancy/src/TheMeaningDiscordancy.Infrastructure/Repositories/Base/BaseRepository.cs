@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TheMeaningDiscordancy.Infrastructure.Data;
 using TheMeaningDiscordancy.Infrastructure.Models;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
@@ -21,18 +22,22 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         return await _context.Set<T>().FindAsync(id);
     }
-    public Task<List<T>> GetAllAsync()
+    public async Task<List<T>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Set<T>().ToListAsync();
     }
 
-    public Task CreateAsync(T entity)
+    public async Task CreateAsync(T entity)
     {
-        throw new NotImplementedException();
+        await _context.Set<T>().AddAsync(entity);
+    }
+    public async Task CreateAsync(List<T> entities)
+    {
+        await _context.Set<T>().AddRangeAsync();
     }
     public void Update(T entity)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().Update(entity);
     }
 
     public void Delete(T entity)

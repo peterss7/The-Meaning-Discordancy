@@ -9,8 +9,10 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
+using TheMeaningDiscordancy.Core.Models.Interfaces;
+
 namespace TheMeaningDiscordancy.Core.Models.Item;
 
-public interface IItemMap
+public interface IItemMap : IDiscordMap
 {
 }

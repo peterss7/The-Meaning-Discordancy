@@ -32,6 +32,8 @@ public static class CoreStartupExtensions
     {
         services.AddScoped<IImageUtilityService, ImageUtilityService>();
 
+        services.AddScoped(typeof(IDiscordMappingService), typeof(DiscordMappingService));
+
         services.AddScoped<IItemService, ItemService>();
         services.AddScoped<IItemMappingService, ItemMappingService>();
         services.AddAutoMapper(typeof(ItemProfile));
