@@ -9,14 +9,14 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
-public interface IDiscordRepository<T> where T : class
+namespace TheMeaningDiscordancy.Core.Extensions;
+
+public static class CoreStartupExtensions
 {
-    Task<T> GetAsync(int id);
-    Task<List<T>> GetAllAsync();
-    Task CreateAsync(T entity);
-    Task CreateAsync(List<T> entities);
-    void Update(T entity);
-    void Delete(T entity);
-    Task SaveChangesAsync();
+    public static void ConfigureCoreServices(this IServiceCollection services)
+    {
+        services.ConfigureItemServices();
+        services.ConfigureTagServices();
+        services.ConfigureUtilityServices();
+    }
 }

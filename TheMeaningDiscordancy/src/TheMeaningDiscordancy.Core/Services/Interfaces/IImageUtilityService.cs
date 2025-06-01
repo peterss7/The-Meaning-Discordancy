@@ -9,14 +9,13 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
-public interface IDiscordRepository<T> where T : class
+using TheMeaningDiscordancy.Core.Models.Errors;
+using TheMeaningDiscordancy.Core.Models.Utilities;
+
+namespace TheMeaningDiscordancy.Core.Services.Interfaces;
+
+public interface IImageUtilityService
 {
-    Task<T> GetAsync(int id);
-    Task<List<T>> GetAllAsync();
-    Task CreateAsync(T entity);
-    Task CreateAsync(List<T> entities);
-    void Update(T entity);
-    void Delete(T entity);
-    Task SaveChangesAsync();
+    Task<DiscordResult<ImageData>> SaveImageAsync(IFormFile file);
+    string GetImageContentType(string path);
 }
