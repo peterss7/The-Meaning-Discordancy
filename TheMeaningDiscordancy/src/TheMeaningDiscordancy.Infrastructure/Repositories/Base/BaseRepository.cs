@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using TheMeaningDiscordancy.Infrastructure.Data;
+using TheMeaningDiscordancy.Infrastructure.Models;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Repositories.Base;

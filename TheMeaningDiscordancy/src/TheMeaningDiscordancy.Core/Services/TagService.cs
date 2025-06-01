@@ -32,13 +32,14 @@ public class TagService : ITagService
         _logger = logger;
     }
 
-    public async Task<DiscordResult<TagEfc>> GetTagAsync(int id)
+    public async Task<DiscordResult<TagEfc?>> GetTagAsync(int id)
     {
-        DiscordResult<TagEfc> result = new();
+        DiscordResult<TagEfc?> result = new();
 
         try
         {
-
+            TagEfc? tag = await _tagRepository.GetAsync(id);
+            result.Value = tag;
         }
         catch (Exception ex)
         {

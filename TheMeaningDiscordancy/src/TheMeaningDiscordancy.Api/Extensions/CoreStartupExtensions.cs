@@ -15,13 +15,14 @@ using TheMeaningDiscordancy.Core.Services;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping;
 using TheMeaningDiscordancy.Infrastructure.Repositories;
+using TheMeaningDiscordancy.Infrastructure.Repositories.Base;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
-namespace TheMeaningDiscordancy.Core.Extensions;
+namespace TheMeaningDiscordancy.Api.Extensions;
 
-public static class TagStartupExtensions
+public static class CoreStartupExtensions
 {
-    public static void ConfigureTagServices(this IServiceCollection services)
+    public static void ConfigureCoreServices(this IServiceCollection services)
     {
         services.ConfigureServices();
         services.ConfigureRespositories();
@@ -29,6 +30,12 @@ public static class TagStartupExtensions
 
     private static void ConfigureServices(this IServiceCollection services)
     {
+        services.AddScoped<IImageUtilityService, ImageUtilityService>();
+
+        services.AddScoped<IItemService, ItemService>();
+        services.AddScoped<IItemMappingService, ItemMappingService>();
+        services.AddAutoMapper(typeof(ItemProfile));
+
         services.AddScoped<ITagService, TagService>();
         services.AddScoped<ITagMappingService, TagMappingService>();
         services.AddAutoMapper(typeof(TagProfile));
@@ -36,6 +43,7 @@ public static class TagStartupExtensions
 
     private static void ConfigureRespositories(this IServiceCollection services)
     {
-        services.AddScoped<ITagRepository, TagRepository>();
+        services.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
+        services.AddScoped(typeof(ITagRepository), typeof(TagRepository));
     }
 }

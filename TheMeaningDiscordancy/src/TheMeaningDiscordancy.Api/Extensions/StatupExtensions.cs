@@ -10,7 +10,6 @@
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 using Microsoft.EntityFrameworkCore;
-using TheMeaningDiscordancy.Core.Extensions;
 using TheMeaningDiscordancy.Infrastructure.Data;
 
 namespace TheMeaningDiscordancy.Api.Extensions;
@@ -23,7 +22,7 @@ public static class StatupExtensions
         services.ConfigureControllers();
         services.ConfigureSwagger();
 
-        services.ConfigurePersistenceServices();
+
         services.ConfigureCoreServices();
         
         services.ConfigureCors();

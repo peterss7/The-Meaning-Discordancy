@@ -11,7 +11,6 @@ namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 public interface IBaseRepository<T>
 {
     Task<T?> GetAsync(int id);
-
     Task<List<T>> GetAllAsync();
     Task CreateAsync(T entity);
     void Update(T entity);
