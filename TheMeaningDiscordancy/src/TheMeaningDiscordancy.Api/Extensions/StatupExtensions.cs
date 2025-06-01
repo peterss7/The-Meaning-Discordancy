@@ -11,8 +11,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using TheMeaningDiscordancy.Core.Extensions;
-using TheMeaningDiscordancy.Infrastructure;
-using TheMeaningDiscordancy.Infrastructure.Extensions;
+using TheMeaningDiscordancy.Infrastructure.Data;
 
 namespace TheMeaningDiscordancy.Api.Extensions;
 

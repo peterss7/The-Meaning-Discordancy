@@ -9,7 +9,7 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-namespace TheMeaningDiscordancy.Core.Classes.Interfaces;
+namespace TheMeaningDiscordancy.Core.Models.Interfaces;
 public interface IDiscordDataEntity
 {
 }

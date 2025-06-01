@@ -12,7 +12,7 @@
 using Microsoft.EntityFrameworkCore;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
-namespace TheMeaningDiscordancy.Core;
+namespace TheMeaningDiscordancy.Infrastructure.Data;
 
 public class DiscordContext : DbContext
 {

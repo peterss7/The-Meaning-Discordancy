@@ -24,8 +24,4 @@
     <ProjectReference Include="..\TheMeaningDiscordancy.Infrastructure\TheMeaningDiscordancy.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Seed\" />
-  </ItemGroup>
-
 </Project>

@@ -9,8 +9,10 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-using TheMeaningDiscordancy.Core.Repositories;
-using TheMeaningDiscordancy.Core.Repositories.Interfaces;
+
+using Microsoft.Extensions.DependencyInjection;
+using TheMeaningDiscordancy.Infrastructure.Repositories;
+using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.Extensions;
 
