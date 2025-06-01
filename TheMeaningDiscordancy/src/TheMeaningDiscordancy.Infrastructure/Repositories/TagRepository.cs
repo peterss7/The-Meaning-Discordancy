@@ -9,56 +9,18 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TheMeaningDiscordancy.Infrastructure.Data;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
+using TheMeaningDiscordancy.Infrastructure.Repositories.Base;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Repositories;
 
-public class TagRepository : ITagRepository
+public class TagRepository : BaseRepository<TagEfc>, ITagRepository 
 {
-    private readonly DiscordContext _context;
-    private readonly ILogger<TagRepository> _logger;
-
     public TagRepository(DiscordContext context,
-        ILogger<TagRepository> logger)
+        ILogger<IRepositoryWrapper> logger) : base(context, logger)
     {
-        _context = context;
-        _logger = logger;
-    }
-    public async Task<List<TagEfc>> GetAllAsync()
-    {
-        return await _context.Tags.ToListAsync();
-    }
-
-    public async Task<TagEfc> GetAsync(int id)
-    {
-        return await _context.Tags.FirstOrDefaultAsync(x => x.TagId == id) ?? new TagEfc();
-    }
-    
-    public async Task CreateAsync(TagEfc entity)
-    {
-        await _context.Tags.AddAsync(entity);
-    }
-
-    public Task CreateAsync(List<TagEfc> entities)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(TagEfc entity)
-    {
-        _context.Update(entity);
-    }
-    public void Delete(TagEfc entity)
-    {
-        _context.Tags.Remove(entity);
-    }
-
-    public async Task SaveChangesAsync()
-    {
-        await _context.SaveChangesAsync();
     }
 }

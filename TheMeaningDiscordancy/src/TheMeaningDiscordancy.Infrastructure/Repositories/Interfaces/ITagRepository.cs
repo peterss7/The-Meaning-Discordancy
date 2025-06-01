@@ -15,6 +15,6 @@ using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
-public interface ITagRepository : IDiscordRepository<TagEfc>
+public interface ITagRepository : IBaseRepository<TagEfc>
 {
 }

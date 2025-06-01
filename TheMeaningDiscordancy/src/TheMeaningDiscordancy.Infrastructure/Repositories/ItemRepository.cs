@@ -13,52 +13,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TheMeaningDiscordancy.Infrastructure.Data;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
+using TheMeaningDiscordancy.Infrastructure.Repositories.Base;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Repositories;
 
-public class ItemRepository : IItemRepository
+public class ItemRepository : BaseRepository<ItemEfc>, IItemRepository
 {
-    private readonly DiscordContext _context;
-    private readonly ILogger<ItemRepository> _logger;
-
     public ItemRepository(DiscordContext context,
-        ILogger<ItemRepository> logger)
+        ILogger<IRepositoryWrapper> logger) 
+        :  base(context, logger)
     {
-        _context = context;
-        _logger = logger;
-    }
-    public async Task<List<ItemEfc>> GetAllAsync()
-    {
-        return await _context.Items.ToListAsync();
-    }
-
-    public async Task<ItemEfc> GetAsync(int id)
-    {
-        return await _context.Items.FirstOrDefaultAsync(x => x.ItemId == id) ?? new ItemEfc();
-    }
-    
-    public async Task CreateAsync(ItemEfc entity)
-    {
-        await _context.Items.AddAsync(entity);
-    }
-
-    public Task CreateAsync(List<ItemEfc> entities)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(ItemEfc entity)
-    {
-        _context.Update(entity);
-    }
-    public void Delete(ItemEfc entity)
-    {
-        _context.Items.Remove(entity);
-    }
-
-    public async Task SaveChangesAsync()
-    {
-        await _context.SaveChangesAsync();
     }
 }

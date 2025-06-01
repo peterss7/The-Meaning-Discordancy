@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMeaningDiscordancy.Api", "TheMeaningDiscordancy\src\TheMeaningDiscordancy.Api\TheMeaningDiscordancy.Api.csproj", "{E423CC2E-AF1D-43D5-AEED-70E172E97889}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMeaningDiscordancy.Core", "TheMeaningDiscordancy\src\TheMeaningDiscordancy.Core\TheMeaningDiscordancy.Core.csproj", "{4E5107C7-1220-4D11-AC06-72F539103003}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3BD24776-F666-4D6C-A71D-47DB7888C259} = {3BD24776-F666-4D6C-A71D-47DB7888C259}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMeaningDiscordancy.Infrastructure", "TheMeaningDiscordancy\src\TheMeaningDiscordancy.Infrastructure\TheMeaningDiscordancy.Infrastructure.csproj", "{3BD24776-F666-4D6C-A71D-47DB7888C259}"
 EndProject

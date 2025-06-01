@@ -15,6 +15,6 @@ using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
-public interface IItemRepository : IDiscordRepository<ItemEfc>
+public interface IItemRepository : IBaseRepository<ItemEfc>
 {
 }

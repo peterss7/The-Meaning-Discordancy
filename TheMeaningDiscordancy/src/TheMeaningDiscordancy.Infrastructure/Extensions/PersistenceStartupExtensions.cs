@@ -11,7 +11,7 @@
 
 
 using Microsoft.Extensions.DependencyInjection;
-using TheMeaningDiscordancy.Infrastructure.Repositories;
+using TheMeaningDiscordancy.Infrastructure.Repositories.Base;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.Extensions;
@@ -25,6 +25,6 @@ public static class PersistenceStartupExtensions
 
     private static void ConfigureServices(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IDiscordRepository<>), typeof(DiscordRepository<>));
+        services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
     }
 }

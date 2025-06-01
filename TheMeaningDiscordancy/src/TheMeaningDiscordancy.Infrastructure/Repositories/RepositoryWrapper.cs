@@ -9,21 +9,21 @@ using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Repositories;
 
-public class DiscordRepository : IRepositoryWrapper
+public class RepositoryWrapper
 {
-    private readonly DiscordContext _context;
+    private DiscordContext _context;
     private IItemRepository _itemRepository;
     private ITagRepository _tagRepository;
-    private readonly ILogger<IRepositoryWrapper> _logger;
+    private ILogger<IRepositoryWrapper> _logger;
 
-    public DiscordRepository(DiscordContext context,
+    public RepositoryWrapper(DiscordContext context,
         ILogger<IRepositoryWrapper> logger)
     {
         _context = context;
         _logger = logger;
     }
 
-    public IItemRepository ItemRepository
+    public IItemRepository ItemEfc
     {
         get
         {
@@ -36,21 +36,21 @@ public class DiscordRepository : IRepositoryWrapper
         }
     }
 
-    public ITagRepository TagRepository
+    public ITagRepository Tag
     {
         get
         {
-            if (_tagRepository == null)
+            if (_tagRepository== null)
             {
-                _tagRepository = new TagRepository(_context, _logger);
+                _tagRepository= new TagRepository(_context, _logger);
             }
+
             return _tagRepository;
         }
     }
 
-
-    public void save()
+    public void Save()
     {
-        throw new NotImplementedException();
+        _context.SaveChanges();
     }
 }
