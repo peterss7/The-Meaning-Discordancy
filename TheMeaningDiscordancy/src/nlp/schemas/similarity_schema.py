@@ -1,4 +1,4 @@
-﻿# Copyright © 2025 Steven Peterson
+# Copyright © 2025 Steven Peterson
 # All rights reserved.
 #
 # No part of this code may be copied, modified, distributed, or used
@@ -9,15 +9,12 @@
 # GitHub: https://github.com/peterss7
 # LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-from marshmallow.schema import Schema, fields
+from marshmallow import Schema, fields
 
 
-class TagSchema(Schema):
-    id = fields.Int(required=True)
-    name = fields.Str(required=True)
-    description = fields.Str()
+class SimilarityInputSchema(Schema):
+    text1 = fields.Str(required=True)
+    text2 = fields.Str(required=True)
 
-
-class TagCreateSchema(Schema):
-    name = fields.Str(required=True)
-    description = fields.Str()
+class SimilaritySchema(Schema):
+    similarity = fields.Str(required=True)

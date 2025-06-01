@@ -2,7 +2,7 @@
 $ErrorActionPreference = "Stop"
 
 # Activate venv
-$venvActivate = ".\venv\Scripts\Activate.ps1"
+$venvActivate = ".\.venv\Scripts\Activate.ps1"
 
 if (-Not (Test-Path $venvActivate)) {
     Write-Host "Virtual environment not found. Run install.ps1 first."

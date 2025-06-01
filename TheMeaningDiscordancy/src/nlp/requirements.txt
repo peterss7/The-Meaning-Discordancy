@@ -1,12 +1,27 @@
+# Flask for API
 flask
 flask_smorest
-python-dotenv
-sqlalchemy
 flask-sqlalchemy
-flask-jwt-extended
-passlib
+flask-cors 
 flask-migrate
-gunicorn
-sentence-transformers
-scikit-learn
+flask-jwt-extended
+
+# Database
+sqlalchemy
 pyodbc
+
+
+# Data
+numpy
+pandas
+scikit-learn
+
+# NLP
+sentence-transformers
+transformers
+torch
+spacy
+nltk
+
+# Utility
+python-dotenv

@@ -9,4 +9,4 @@
 # GitHub: https://github.com/peterss7  
 # LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-from .tag_schema import TagSchema, TagCreateSchema
+from .similarity_schema import SimilaritySchema, SimilarityInputSchema
