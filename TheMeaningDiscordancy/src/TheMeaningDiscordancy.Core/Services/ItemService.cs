@@ -107,7 +107,7 @@ public class ItemService : IItemService
             }
 
             ImageData? imageData = imageDataResult?.Value;
-
+            _logger.LogWarning($"Name: {imageData?.ImageName}, path: {imageData?.ImagePath}");
             item.ImageName = imageData?.ImageName!;
             item.ImagePath = imageData?.ImagePath!;
             item.ItemId = newId;

@@ -22,10 +22,22 @@ public class SeedService : ISeedService
         {
             List<ThemeEfc> themes = new ()
             {
-                new ThemeEfc { Name = "Order and Chaos" },
-                new ThemeEfc { Name = "Creation and Destruction" },
-                new ThemeEfc { Name = "Divine and Material" },
-                new ThemeEfc { Name = "Unity and Division" },
+                new ThemeEfc { 
+                    ThemeId = 1,
+                    Name = "Order and Chaos"
+                },
+                new ThemeEfc { 
+                    ThemeId = 2,
+                    Name = "Creation and Destruction" 
+                },
+                new ThemeEfc { 
+                    ThemeId = 3,
+                    Name = "Divine and Material" 
+                },
+                new ThemeEfc { 
+                    ThemeId = 4,
+                    Name = "Unity and Division" 
+                },
             };
             _logger.LogWarning("Seeding themes...");
             await _repository.ThemeRepository.CreateAsync(themes);
