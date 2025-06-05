@@ -14,13 +14,21 @@ using TheMeaningDiscordancy.Core.Models.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
-public class ItemEfc : IDiscordDataEntity
+public class ImageDataEfc : IDiscordDataEntity
 {
     [Key]
-    public Guid ObjectKey { get; set; }
-    public Guid ImageDataObjectKey { get; set; } = Guid.Empty;
-    public int ItemId { get; set; }
-    public string? Name { get; set; }
-    public string? Description { get; set; }
-    public string? Type { get; set; }
+    public Guid ObjectKey { get; set; } = Guid.Empty;
+    public string ImageName { get; set; } = string.Empty;
+    public string ImagePath { get; set; } = string.Empty;
+    public List<Guid> SeedObjectKeys { get; set; } = new();
+    public ImageDataEfc()
+    {
+        ObjectKey = Guid.NewGuid();
+    }
+    public ImageDataEfc(string imageName, string imagePath)
+    {
+        ObjectKey = Guid.NewGuid();
+        ImageName = imageName;
+        ImagePath = imagePath;
+    }
 }

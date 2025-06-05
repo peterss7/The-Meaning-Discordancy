@@ -26,6 +26,7 @@ public class DiscordContext : DbContext
 
     public DbSet<ItemEfc> Items { get; set; }
     public DbSet<TagEfc> Tags { get; set; }
+    public DbSet<ImageDataEfc> ImageData { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

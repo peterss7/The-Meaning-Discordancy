@@ -15,7 +15,6 @@ using TheMeaningDiscordancy.Core.Services;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping;
 using TheMeaningDiscordancy.Infrastructure.Repositories;
-using TheMeaningDiscordancy.Infrastructure.Repositories.Base;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Api.Extensions;

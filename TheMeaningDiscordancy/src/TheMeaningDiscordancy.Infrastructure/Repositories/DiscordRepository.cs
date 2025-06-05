@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheMeaningDiscordancy.Infrastructure.Data;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
@@ -14,6 +9,7 @@ public class DiscordRepository : IRepositoryWrapper
     private readonly DiscordContext _context;
     private IItemRepository _itemRepository;
     private ITagRepository _tagRepository;
+    private IImageDataRepository _imageRepository;
     private readonly ILogger<IRepositoryWrapper> _logger;
 
     public DiscordRepository(DiscordContext context,
@@ -22,6 +18,8 @@ public class DiscordRepository : IRepositoryWrapper
         _context = context;
         _logger = logger;
     }
+
+    public IImageDataRepository ImageRepository => _imageRepository ??= new ImageDataRepository(_context, _logger);
 
     public IItemRepository ItemRepository
     {

@@ -12,8 +12,8 @@
 using Microsoft.IdentityModel.Tokens;
 using TheMeaningDiscordancy.Core.Configuration;
 using TheMeaningDiscordancy.Core.Models.Errors;
-using TheMeaningDiscordancy.Core.Models.Utilities;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Core.Services;
 
@@ -29,9 +29,9 @@ public class ImageUtilityService : IImageUtilityService
         _logger = logger;
     }
 
-    public async Task<DiscordResult<ImageData>> SaveImageAsync(IFormFile file)
+    public async Task<DiscordResult<ImageDataEfc>> SaveImageAsync(IFormFile file)
     {
-        DiscordResult<ImageData> result = new();
+        DiscordResult<ImageDataEfc> result = new();
 
         try
         {
@@ -51,7 +51,7 @@ public class ImageUtilityService : IImageUtilityService
             {
                 await file.CopyToAsync(stream);
             }
-            result.Value = new ImageData(fileName, filePath);
+            result.Value = new ImageDataEfc(fileName, filePath);
         }
         catch (Exception ex)
         {

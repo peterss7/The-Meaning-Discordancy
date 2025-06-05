@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheMeaningDiscordancy.Infrastructure.Data;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
@@ -14,6 +9,7 @@ public class RepositoryWrapper
     private DiscordContext _context;
     private IItemRepository _itemRepository;
     private ITagRepository _tagRepository;
+    private IImageDataRepository _imageRepository;
     private ILogger<IRepositoryWrapper> _logger;
 
     public RepositoryWrapper(DiscordContext context,
@@ -23,32 +19,9 @@ public class RepositoryWrapper
         _logger = logger;
     }
 
-    public IItemRepository ItemEfc
-    {
-        get
-        {
-            if (_itemRepository == null)
-            {
-                _itemRepository = new ItemRepository(_context, _logger);
-            }
-
-            return _itemRepository;
-        }
-    }
-
-    public ITagRepository Tag
-    {
-        get
-        {
-            if (_tagRepository== null)
-            {
-                _tagRepository= new TagRepository(_context, _logger);
-            }
-
-            return _tagRepository;
-        }
-    }
-
+    public IItemRepository ItemEfc => _itemRepository ??= new ItemRepository(_context, _logger);
+    public IImageDataRepository ImageDataEfc => _imageRepository ??= new ImageDataRepository(_context, _logger);
+    public ITagRepository Tag => _tagRepository ??= new TagRepository(_context, _logger);
     public void Save()
     {
         _context.SaveChanges();

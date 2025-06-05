@@ -9,9 +9,9 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
+using Microsoft.EntityFrameworkCore.Metadata;
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Item.Dtos;
-using TheMeaningDiscordancy.Core.Models.Utilities;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
@@ -20,17 +20,20 @@ namespace TheMeaningDiscordancy.Core.Services;
 
 public class ItemService : IItemService
 {
-    private readonly IItemRepository _itemRepository;
+    private readonly IRepositoryWrapper _repository;
+    private readonly IImageDataService _imageDataService;
     private readonly IImageUtilityService _imageUtilityService;
     private readonly IItemMappingService _mapper;
     private readonly ILogger<ItemService> _logger;
 
-    public ItemService(IItemRepository itemRepository,
+    public ItemService(IRepositoryWrapper repository,
+        IImageDataService imageDataService,
         IImageUtilityService imageUtilityService,
         IItemMappingService mapper,
         ILogger<ItemService> logger)
     {
-        _itemRepository = itemRepository;
+        _repository = repository;
+        _imageDataService = imageDataService;
         _imageUtilityService = imageUtilityService;
         _mapper = mapper;
         _logger = logger;
@@ -42,7 +45,7 @@ public class ItemService : IItemService
 
         try
         {
-            ItemEfc item = await _itemRepository.GetAsync(id);
+            ItemEfc item = await _repository.ItemRepository.GetAsync(id) ?? new();
             if (item == null)
             {
                 _logger.LogError($"Id {id} item could not be found.");
@@ -66,7 +69,7 @@ public class ItemService : IItemService
 
         try
         {
-            List<ItemEfc> items = await _itemRepository.GetAllAsync();
+            List<ItemEfc> items = await _repository.ItemRepository.GetAllAsync();
             result.Value = items;
         }
         catch (Exception ex)
@@ -84,7 +87,7 @@ public class ItemService : IItemService
 
         try
         {
-            List<ItemEfc> items = await _itemRepository.GetAllAsync();
+            List<ItemEfc> items = await _repository.ItemRepository.GetAllAsync();
             int newId = items.Count > 0 ? items.Select(x => x.ItemId).Max() + 1 : 1;
 
             if (inputDto.Image == null ||
@@ -94,7 +97,7 @@ public class ItemService : IItemService
             }
             ItemEfc item = new();
             _mapper.MapDtoToEntity<ItemDto, ItemEfc>(inputDto, item);
-            DiscordResult<ImageData> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image!);
+            DiscordResult<ImageDataEfc> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image!);
 
             if (imageDataResult.HasError)
             {
@@ -104,16 +107,18 @@ public class ItemService : IItemService
             if (imageDataResult.Value == null)
             {
                 result.Errors.Add(new DiscordError(BaseDiscordError.NullImageResult, "Image in input object is null."));
+                return result;
             }
 
-            ImageData? imageData = imageDataResult?.Value;
+            ImageDataEfc imageData = imageDataResult.Value;
 
-            item.ImageName = imageData?.ImageName!;
-            item.ImagePath = imageData?.ImagePath!;
-            item.ItemId = newId;
+            _logger.LogCritical($"ImageData: {imageData?.ImagePath}, {imageData?.ImageName}");
+            
+            _repository.ImageRepository.Update(imageData!);
+            await _repository.ImageRepository.SaveChangesAsync();
 
-            await _itemRepository.CreateAsync(item);
-            await _itemRepository.SaveChangesAsync();
+            await _repository.ItemRepository.CreateAsync(item);
+            await _repository.ItemRepository.SaveChangesAsync();
 
             result.Value = item;
         }
@@ -151,7 +156,7 @@ public class ItemService : IItemService
             ItemEfc item = itemResult.Value;
 
             _mapper.MapDtoToEntity<ItemDto, ItemEfc>(inputDto, item);
-            DiscordResult<ImageData> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image);
+            DiscordResult<ImageDataEfc> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image);
 
             if (imageDataResult.HasError)
             {
@@ -165,13 +170,14 @@ public class ItemService : IItemService
                 return result;
             }
 
-            ImageData imageData = imageDataResult.Value;
+            ImageDataEfc imageData = imageDataResult.Value;
 
-            item.ImageName = imageData.ImageName!;
-            item.ImagePath = imageData.ImagePath!;
+            await _repository.ImageRepository.CreateAsync(imageData); 
 
-            _itemRepository.Update(item);
-            await _itemRepository.SaveChangesAsync();
+            item.ImageDataObjectKey = imageData.ObjectKey;
+
+            _repository.ItemRepository.Update(item);
+            await _repository.ItemRepository.SaveChangesAsync();
             result.Value = item;
         }
         catch (Exception ex)
@@ -189,14 +195,14 @@ public class ItemService : IItemService
 
         try
         {
-            ItemEfc? item = await _itemRepository.GetAsync(id);
+            ItemEfc? item = await _repository.ItemRepository.GetAsync(id);
             if (item == null)
             {
                 result.Errors.Add(new DiscordError(BaseDiscordError.NullInput, "Item found to delete does not exist."));
                 return result;
             }
-            _itemRepository.Delete(item);
-            await _itemRepository.SaveChangesAsync();
+            _repository.ItemRepository.Delete(item);
+            await _repository.ItemRepository.SaveChangesAsync();
             result.Value = item;
         }
         catch (Exception ex)
