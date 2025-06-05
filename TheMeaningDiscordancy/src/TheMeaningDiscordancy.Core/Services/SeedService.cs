@@ -1,4 +1,5 @@
 ﻿using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Infrastructure.Models.Classes;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
@@ -41,7 +42,7 @@ public class SeedService : ISeedService
                 {
                     Title = "City in Grid",
                     ImagePath = "/assets/images/city_grid.jpg",
-                     ThemeVector = new ThemeVectorEfc
+                     ThemeVector = new ThemeVector
                     {
                         OrderAxis = 0.9f,
                         CreationAxis = -0.4f,
@@ -53,7 +54,7 @@ public class SeedService : ISeedService
                 {
                     Title = "Wild Forest",
                     ImagePath = "/assets/images/forest_wild.jpg",
-                    ThemeVector = new ThemeVectorEfc
+                    ThemeVector = new ThemeVector
                     {
                         OrderAxis = 0.9f,
                         CreationAxis = -0.4f,

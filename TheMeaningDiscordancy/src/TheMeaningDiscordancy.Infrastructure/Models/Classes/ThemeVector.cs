@@ -8,11 +8,8 @@ using TheMeaningDiscordancy.Core.Models.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Models.Classes;
 
-public class ThemeVector : IDiscordDataEntity
+public class ThemeVector
 {
-    [Key]
-    public Guid ObjectKey { get; set; }
-    public Guid SeedId { get; set; }
     public float OrderAxis { get; set; }
     public float CreationAxis { get; set; }
     public float DivineAxis { get; set; }

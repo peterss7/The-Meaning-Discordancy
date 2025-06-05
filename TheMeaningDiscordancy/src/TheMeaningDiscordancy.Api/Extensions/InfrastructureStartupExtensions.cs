@@ -19,6 +19,7 @@ public static class InfrastructureStartupExtensions
     {
         using var scope = app.ApplicationServices.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<DiscordContext>();
+        await db.Database.EnsureCreatedAsync();
         var seeder = scope.ServiceProvider.GetRequiredService<ISeedService>();
         await seeder.SeedAsync();
     }
