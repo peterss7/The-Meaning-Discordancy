@@ -4,5 +4,5 @@ public interface IRepositoryWrapper
 {
     IItemRepository ItemRepository { get; }
     ITagRepository TagRepository { get; }
-    void save();
+    Task SaveChangesAsync(CancellationToken cancellationToken);
 }

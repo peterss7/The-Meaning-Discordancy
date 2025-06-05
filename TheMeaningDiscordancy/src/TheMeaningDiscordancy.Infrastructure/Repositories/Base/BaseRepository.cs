@@ -43,7 +43,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         throw new NotImplementedException();
     }
-    public Task SaveChangesAsync()
+    public Task SaveChangesAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

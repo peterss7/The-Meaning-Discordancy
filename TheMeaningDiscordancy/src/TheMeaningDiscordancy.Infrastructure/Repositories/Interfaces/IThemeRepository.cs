@@ -2,6 +2,6 @@
 
 namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
-public interface ISeedRepository : IBaseRepository<SeedEfc>
+public interface IThemeRepository : IBaseRepository<ThemeEfc>
 {
 }

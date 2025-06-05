@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
 using TheMeaningDiscordancy.Core.Services;
 using TheMeaningDiscordancy.Infrastructure.Data;
+using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
+using TheMeaningDiscordancy.Infrastructure.Repositories;
 
 namespace TheMeaningDiscordancy.Api.Extensions;
 
@@ -11,6 +11,7 @@ public static class InfrastructureStartupExtensions
     public static async void ConfigureInfrastructure(this IServiceCollection services, IApplicationBuilder app, ConfigurationManager configuration)
     {
         ConfigureDbContext(services, configuration);
+        services.ConfigureRespositories();
         await SeedSeeds(app);
     }
 
@@ -26,6 +27,14 @@ public static class InfrastructureStartupExtensions
     {
         services.AddDbContext<DiscordContext>(options =>
           options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+    }
+
+    private static void ConfigureRespositories(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
+        services.AddScoped(typeof(ITagRepository), typeof(TagRepository));
+        services.AddScoped(typeof(ISeedRepository), typeof(SeedRepository));    
+        services.AddScoped(typeof(IThemeRepository), typeof(ThemeRepository));
     }
 
 }

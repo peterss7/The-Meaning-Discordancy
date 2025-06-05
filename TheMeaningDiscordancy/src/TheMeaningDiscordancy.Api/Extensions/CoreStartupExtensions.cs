@@ -14,8 +14,6 @@
 using TheMeaningDiscordancy.Core.Services;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping;
-using TheMeaningDiscordancy.Infrastructure.Repositories;
-using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Api.Extensions;
 
@@ -24,7 +22,6 @@ public static class CoreStartupExtensions
     public static void ConfigureCoreServices(this IServiceCollection services)
     {
         services.ConfigureServices();
-        services.ConfigureRespositories();
     }
 
     private static void ConfigureServices(this IServiceCollection services)
@@ -42,11 +39,6 @@ public static class CoreStartupExtensions
         services.AddAutoMapper(typeof(TagProfile));
 
         services.AddScoped<ISeedService, SeedService>();
-    }
 
-    private static void ConfigureRespositories(this IServiceCollection services)
-    {
-        services.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
-        services.AddScoped(typeof(ITagRepository), typeof(TagRepository));
-    }
+   
 }

@@ -9,6 +9,8 @@ public class DiscordRepository : IRepositoryWrapper
     private readonly DiscordContext _context;
     private IItemRepository _itemRepository;
     private ITagRepository _tagRepository;
+    private ISeedRepository _seedRepository;
+    private IThemeRepository _themeRepository;
     private readonly ILogger<IRepositoryWrapper> _logger;
 
     public DiscordRepository(DiscordContext context,
@@ -16,36 +18,15 @@ public class DiscordRepository : IRepositoryWrapper
     {
         _context = context;
         _logger = logger;
+
     }
 
-    public IItemRepository ItemRepository
+    public IItemRepository ItemRepository =>  _itemRepository ??= new ItemRepository(_context, _logger);
+    public ITagRepository TagRepository => _tagRepository ??= new TagRepository(_context, _logger);
+    public ISeedRepository SeedRepository => _seedRepository ??= new SeedRepository(_context, _logger);
+    public IThemeRepository ThemeRepository => _themeRepository ??= new ThemeRepository(_context, _logger);
+    public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        get
-        {
-            if (_itemRepository == null)
-            {
-                _itemRepository = new ItemRepository(_context, _logger);
-            }
-
-            return _itemRepository;
-        }
-    }
-
-    public ITagRepository TagRepository
-    {
-        get
-        {
-            if (_tagRepository == null)
-            {
-                _tagRepository = new TagRepository(_context, _logger);
-            }
-            return _tagRepository;
-        }
-    }
-
-
-    public void save()
-    {
-        throw new NotImplementedException();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

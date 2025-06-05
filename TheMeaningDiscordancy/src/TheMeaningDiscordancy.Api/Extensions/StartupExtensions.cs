@@ -9,9 +9,6 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-using Microsoft.EntityFrameworkCore;
-using TheMeaningDiscordancy.Infrastructure.Data;
-
 namespace TheMeaningDiscordancy.Api.Extensions;
 
 public static class StartupExtensions
