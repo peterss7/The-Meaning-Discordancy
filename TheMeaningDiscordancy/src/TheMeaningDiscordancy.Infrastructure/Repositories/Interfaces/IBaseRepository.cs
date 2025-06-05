@@ -8,5 +8,6 @@ public interface IBaseRepository<T>
     Task CreateAsync(List<T> entity);
     void Update(T entity);
     void Delete(T entity);
-    Task SaveChangesAsync(CancellationToken cancellationToken);
+    Task SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task<bool> AnyAsync();
 }

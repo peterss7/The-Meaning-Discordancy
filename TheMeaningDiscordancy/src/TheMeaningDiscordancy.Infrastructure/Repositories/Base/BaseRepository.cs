@@ -43,8 +43,12 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         throw new NotImplementedException();
     }
-    public Task SaveChangesAsync(CancellationToken cancellationToken)
+    public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        await _context.SaveChangesAsync();
+    }
+    public async Task <bool> AnyAsync()
+    {
+        return await _context.Set<T>().AnyAsync();
     }
 }

@@ -13,14 +13,14 @@ namespace TheMeaningDiscordancy.Api.Extensions;
 
 public static class StartupExtensions
 {
-    public static void ConfigureStartupServices(this IServiceCollection services, ConfigurationManager configuration, IApplicationBuilder app)
+    public static void ConfigureStartupServices(this IServiceCollection services, ConfigurationManager configuration)
     {
-        services.ConfigureInfrastructure(app, configuration);
         services.ConfigureControllers();
         services.ConfigureSwagger();
-
-
+        
         services.ConfigureCoreServices();
+
+        services.ConfigureInfrastructure(configuration);
         
         services.ConfigureCors();
     }

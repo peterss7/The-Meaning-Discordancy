@@ -1,63 +1,69 @@
 ﻿using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.Services;
 
 public class SeedService : ISeedService
 {
-    private readonly ISeedRepository _seedRepository;
+    private readonly IRepositoryWrapper _repository;
     private readonly ILogger<SeedService> _logger;
 
-    public SeedService(ISeedRepository seedRepository,
+    public SeedService(IRepositoryWrapper repository,
         ILogger<SeedService> logger)
     {
-        _seedRepository = seedRepository;
+        _repository = repository;
         _logger = logger;
     }
     public async Task SeedAsync()
     {
-        f(!_seedRepository.Themes.Any())
+        _logger.LogWarning("Entering Seed method");
+        if (!(await _repository.ThemeRepository.AnyAsync()))
         {
-            var themes = new[]
+            _logger.LogWarning($"Num Themes: {(await _repository.ThemeRepository.GetAllAsync()).Count}");
+            List<ThemeEfc> themes = new ()
             {
-                new Theme { Name = "Order" },
-                new Theme { Name = "Chaos" },
-                new Theme { Name = "Divine" },
-                new Theme { Name = "Material" },
-                new Theme { Name = "Unity" },
-                new Theme { Name = "Division" }
+                new ThemeEfc { Name = "Order and Chaos" },
+                new ThemeEfc { Name = "Creation and Destruction" },
+                new ThemeEfc { Name = "Divine and Material" },
+                new ThemeEfc { Name = "Unity and Division" },
             };
-
-            _seedRepository.Themes.AddRange(themes);
-            await _seedRepository.SaveChangesAsync();
+            _logger.LogWarning("Seeding themes...");
+            await _repository.ThemeRepository.CreateAsync(themes);
+            await _repository.SaveChangesAsync();
         }
 
-        if (!_seedRepository.SeedIdeas.Any())
+        if (!(await _repository.SeedRepository.AnyAsync()))
         {
-            var themeDict = _seedRepository.Themes.ToDictionary(t => t.Name, t => t.Id);
+            var themeDict = (await _repository.ThemeRepository.GetAllAsync()).ToDictionary(t => t.Name, t => t.ThemeId);
 
-            var seedIdeas = new[]
+            _logger.LogCritical($"Num SeedsL {(await _repository.SeedRepository.GetAllAsync()).Count}");
+
+            List<SeedEfc> seedIdeas = new()
             {
-                new SeedIdea
+                new SeedEfc
                 {
                     Title = "City in Grid",
-                    ThemeId = themeDict["Order"],
-                    Description = "A perfectly structured city",
                     ImagePath = "/assets/images/city_grid.jpg"
                 },
-                new SeedIdea
+                new SeedEfc
                 {
                     Title = "Wild Forest",
-                    ThemeId = themeDict["Chaos"],
-                    Description = "Untamed wilderness",
-                    ImagePath = "/assets/images/forest_wild.jpg"
+                    ImagePath = "/assets/images/forest_wild.jpg",
+                    ThemeVector = new ThemeVectorEfc
+                    {
+                        OrderAxis = 0.9f,
+                        CreationAxis = -0.4f,
+                        DivineAxis = 0.6f,
+                        UnityAxis = -0.1f
+                    }
                 },
                 // Add more here...
             };
 
-            _seedRepository.SeedIdeas.AddRange(seedIdeas);
-            await _seedRepository.SaveChangesAsync();
+            await _repository.SeedRepository.CreateAsync(seedIdeas);
+            await _repository.SaveChangesAsync();
         }
     }
 }
-}
+

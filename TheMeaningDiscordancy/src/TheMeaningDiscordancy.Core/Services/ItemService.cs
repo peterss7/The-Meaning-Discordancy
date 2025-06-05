@@ -20,17 +20,17 @@ namespace TheMeaningDiscordancy.Core.Services;
 
 public class ItemService : IItemService
 {
-    private readonly IItemRepository _itemRepository;
+    private readonly IRepositoryWrapper _repository;
     private readonly IImageUtilityService _imageUtilityService;
     private readonly IItemMappingService _mapper;
     private readonly ILogger<ItemService> _logger;
 
-    public ItemService(IItemRepository itemRepository,
+    public ItemService(IRepositoryWrapper repository,
         IImageUtilityService imageUtilityService,
         IItemMappingService mapper,
         ILogger<ItemService> logger)
     {
-        _itemRepository = itemRepository;
+        _repository = repository;
         _imageUtilityService = imageUtilityService;
         _mapper = mapper;
         _logger = logger;
@@ -42,7 +42,7 @@ public class ItemService : IItemService
 
         try
         {
-            ItemEfc item = await _itemRepository.GetAsync(id);
+            ItemEfc? item = await _repository.ItemRepository.GetAsync(id);
             if (item == null)
             {
                 _logger.LogError($"Id {id} item could not be found.");
@@ -66,7 +66,7 @@ public class ItemService : IItemService
 
         try
         {
-            List<ItemEfc> items = await _itemRepository.GetAllAsync();
+            List<ItemEfc> items = await _repository.ItemRepository.GetAllAsync();
             result.Value = items;
         }
         catch (Exception ex)
@@ -84,7 +84,7 @@ public class ItemService : IItemService
 
         try
         {
-            List<ItemEfc> items = await _itemRepository.GetAllAsync();
+            List<ItemEfc> items = await _repository.ItemRepository.GetAllAsync();
             int newId = items.Count > 0 ? items.Select(x => x.ItemId).Max() + 1 : 1;
 
             if (inputDto.Image == null ||
@@ -112,8 +112,8 @@ public class ItemService : IItemService
             item.ImagePath = imageData?.ImagePath!;
             item.ItemId = newId;
 
-            await _itemRepository.CreateAsync(item);
-            await _itemRepository.SaveChangesAsync();
+            await _repository.ItemRepository.CreateAsync(item);
+            await _repository.ItemRepository.SaveChangesAsync();
 
             result.Value = item;
         }
@@ -170,8 +170,8 @@ public class ItemService : IItemService
             item.ImageName = imageData.ImageName!;
             item.ImagePath = imageData.ImagePath!;
 
-            _itemRepository.Update(item);
-            await _itemRepository.SaveChangesAsync();
+            _repository.ItemRepository.Update(item);
+            await _repository.ItemRepository.SaveChangesAsync();
             result.Value = item;
         }
         catch (Exception ex)
@@ -189,14 +189,14 @@ public class ItemService : IItemService
 
         try
         {
-            ItemEfc? item = await _itemRepository.GetAsync(id);
+            ItemEfc? item = await _repository.ItemRepository.GetAsync(id);
             if (item == null)
             {
                 result.Errors.Add(new DiscordError(BaseDiscordError.NullInput, "Item found to delete does not exist."));
                 return result;
             }
-            _itemRepository.Delete(item);
-            await _itemRepository.SaveChangesAsync();
+            _repository.ItemRepository.Delete(item);
+            await _repository.ItemRepository.SaveChangesAsync();
             result.Value = item;
         }
         catch (Exception ex)

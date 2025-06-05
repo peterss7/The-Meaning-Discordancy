@@ -27,6 +27,7 @@ public class DiscordRepository : IRepositoryWrapper
     public IThemeRepository ThemeRepository => _themeRepository ??= new ThemeRepository(_context, _logger);
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
+        _logger.LogWarning("Saving DB");
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

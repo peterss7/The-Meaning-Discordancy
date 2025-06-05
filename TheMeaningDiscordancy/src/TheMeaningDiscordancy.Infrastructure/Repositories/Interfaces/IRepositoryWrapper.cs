@@ -4,5 +4,7 @@ public interface IRepositoryWrapper
 {
     IItemRepository ItemRepository { get; }
     ITagRepository TagRepository { get; }
-    Task SaveChangesAsync(CancellationToken cancellationToken);
+    ISeedRepository SeedRepository { get; }
+    IThemeRepository ThemeRepository { get; }
+    Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

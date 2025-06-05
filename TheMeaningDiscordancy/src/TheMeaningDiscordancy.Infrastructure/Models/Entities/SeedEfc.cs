@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TheMeaningDiscordancy.Core.Models.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
-public class SeedEfc
+public class SeedEfc : IDiscordDataEntity
 {
     [Key]
     public Guid ObjectKey { get; set; }
     public int SeedId { get; set; }
-    public string Title { get; set; }
-    public int ThemeId { get; set; }
-    public ThemeEfc Theme { get; set; }
-    public string Description { get; set; }
-    public string ImagePath { get; set; }
+    public string Title { get; set; } = "";
+    public string ImagePath { get; set; }= "";
+    public ThemeVectorEfc ThemeVector { get; set; } = new();
 }

@@ -26,11 +26,15 @@ public class DiscordContext : DbContext
 
     public DbSet<ItemEfc> Items { get; set; }
     public DbSet<TagEfc> Tags { get; set; }
+    public DbSet<ThemeEfc> Themes { get; set; }
+    public DbSet<SeedEfc> Seeds { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ItemEfc>()
             .HasIndex(p => p.ItemId)
             .IsUnique();
+        modelBuilder.Entity<SeedEfc>()
+            .OwnsOne(s => s.ThemeVector);
     }
 }

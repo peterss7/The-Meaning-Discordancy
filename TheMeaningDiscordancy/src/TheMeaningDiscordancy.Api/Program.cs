@@ -13,7 +13,7 @@ using TheMeaningDiscordancy.Api.Extensions;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         ConfigurationManager configuration = builder.Configuration;
@@ -21,9 +21,11 @@ public class Program
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
             .AddJsonFile("appsettings.Local.json", optional: true);
 
+        builder.Services.ConfigureStartupServices(configuration);
+
         var app = builder.Build();
 
-        builder.Services.ConfigureStartupServices(configuration, app);
+        await app.SeedSeeds();
 
         if (app.Environment.IsDevelopment())
         {

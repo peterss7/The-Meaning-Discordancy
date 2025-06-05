@@ -27,6 +27,7 @@ public static class CoreStartupExtensions
     private static void ConfigureServices(this IServiceCollection services)
     {
         services.AddScoped<IImageUtilityService, ImageUtilityService>();
+        services.AddScoped<ISeedService, SeedService>();
 
         services.AddScoped(typeof(IDiscordMappingService), typeof(DiscordMappingService));
 
@@ -38,7 +39,5 @@ public static class CoreStartupExtensions
         services.AddScoped<ITagMappingService, TagMappingService>();
         services.AddAutoMapper(typeof(TagProfile));
 
-        services.AddScoped<ISeedService, SeedService>();
-
-   
+    }
 }
