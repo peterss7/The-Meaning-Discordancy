@@ -1,12 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheMeaningDiscordancy.Infrastructure.Models.Entities;
-
-namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
+﻿namespace TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 public interface IBaseRepository<T>
 {

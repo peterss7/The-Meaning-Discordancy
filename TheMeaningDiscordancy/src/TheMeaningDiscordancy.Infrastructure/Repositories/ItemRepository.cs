@@ -9,7 +9,6 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TheMeaningDiscordancy.Infrastructure.Data;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;

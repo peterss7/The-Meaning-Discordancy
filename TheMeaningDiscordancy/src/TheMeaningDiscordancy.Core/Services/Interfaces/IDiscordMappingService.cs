@@ -1,6 +1,4 @@
 ﻿using TheMeaningDiscordancy.Core.Models.Interfaces;
-using TheMeaningDiscordancy.Core.Models.Item;
-using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Core.Services.Interfaces;
 

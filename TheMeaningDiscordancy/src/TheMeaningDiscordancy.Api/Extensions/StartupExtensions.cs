@@ -14,11 +14,11 @@ using TheMeaningDiscordancy.Infrastructure.Data;
 
 namespace TheMeaningDiscordancy.Api.Extensions;
 
-public static class StatupExtensions
+public static class StartupExtensions
 {
-    public static void ConfigureStartupServices(this IServiceCollection services, ConfigurationManager configuration)
+    public static void ConfigureStartupServices(this IServiceCollection services, ConfigurationManager configuration, IApplicationBuilder app)
     {
-        services.ConfigureDbContext(configuration);
+        services.ConfigureInfrastructure(app, configuration);
         services.ConfigureControllers();
         services.ConfigureSwagger();
 
@@ -39,12 +39,7 @@ public static class StatupExtensions
         services.AddControllers();
     }
 
-    private static void ConfigureDbContext(this IServiceCollection services, ConfigurationManager configuration)
-    {
-        services.AddDbContext<DiscordContext>(options =>
-          options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-    }
-
+    
     private static void ConfigureCors(this IServiceCollection services)
     {
         services.AddCors(options =>

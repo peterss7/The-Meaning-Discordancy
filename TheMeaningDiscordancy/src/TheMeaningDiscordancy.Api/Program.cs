@@ -21,9 +21,9 @@ public class Program
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
             .AddJsonFile("appsettings.Local.json", optional: true);
 
-        builder.Services.ConfigureStartupServices(configuration);
-
         var app = builder.Build();
+
+        builder.Services.ConfigureStartupServices(configuration, app);
 
         if (app.Environment.IsDevelopment())
         {
