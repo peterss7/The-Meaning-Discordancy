@@ -35,6 +35,12 @@ public class DiscordContext : DbContext
             .HasIndex(p => p.ItemId)
             .IsUnique();
         modelBuilder.Entity<SeedEfc>()
-            .OwnsOne(s => s.ThemeVector);
+            .OwnsOne(s => s.ThemeVector, vector =>
+            {
+                vector.Property(v => v.OrderAxis);
+                vector.Property(v => v.CreationAxis);
+                vector.Property(v => v.DivineAxis);
+                vector.Property(v => v.UnityAxis);
+            });
     }
 }

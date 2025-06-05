@@ -32,6 +32,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     }
     public async Task CreateAsync(List<T> entities)
     {
+        _logger.LogWarning($"Adding objects: {entities.Count}");
         await _context.Set<T>().AddRangeAsync();
     }
     public void Update(T entity)

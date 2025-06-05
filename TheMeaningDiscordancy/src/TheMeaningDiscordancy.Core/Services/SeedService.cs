@@ -17,10 +17,8 @@ public class SeedService : ISeedService
     }
     public async Task SeedAsync()
     {
-        _logger.LogWarning("Entering Seed method");
         if (!(await _repository.ThemeRepository.AnyAsync()))
         {
-            _logger.LogWarning($"Num Themes: {(await _repository.ThemeRepository.GetAllAsync()).Count}");
             List<ThemeEfc> themes = new ()
             {
                 new ThemeEfc { Name = "Order and Chaos" },
@@ -37,14 +35,19 @@ public class SeedService : ISeedService
         {
             var themeDict = (await _repository.ThemeRepository.GetAllAsync()).ToDictionary(t => t.Name, t => t.ThemeId);
 
-            _logger.LogCritical($"Num SeedsL {(await _repository.SeedRepository.GetAllAsync()).Count}");
-
             List<SeedEfc> seedIdeas = new()
             {
                 new SeedEfc
                 {
                     Title = "City in Grid",
-                    ImagePath = "/assets/images/city_grid.jpg"
+                    ImagePath = "/assets/images/city_grid.jpg",
+                     ThemeVector = new ThemeVectorEfc
+                    {
+                        OrderAxis = 0.9f,
+                        CreationAxis = -0.4f,
+                        DivineAxis = 0.6f,
+                        UnityAxis = -0.1f
+                    }
                 },
                 new SeedEfc
                 {

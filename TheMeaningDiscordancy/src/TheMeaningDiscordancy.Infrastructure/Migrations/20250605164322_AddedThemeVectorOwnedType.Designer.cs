@@ -12,8 +12,8 @@ using TheMeaningDiscordancy.Infrastructure.Data;
 namespace TheMeaningDiscordancy.Infrastructure.Migrations
 {
     [DbContext(typeof(DiscordContext))]
-    [Migration("20250605160245_AddedThemesAndSeeds")]
-    partial class AddedThemesAndSeeds
+    [Migration("20250605164322_AddedThemeVectorOwnedType")]
+    partial class AddedThemeVectorOwnedType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,6 +130,9 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
 
                             b1.Property<float>("OrderAxis")
                                 .HasColumnType("real");
+
+                            b1.Property<Guid>("SeedId")
+                                .HasColumnType("uniqueidentifier");
 
                             b1.Property<float>("UnityAxis")
                                 .HasColumnType("real");

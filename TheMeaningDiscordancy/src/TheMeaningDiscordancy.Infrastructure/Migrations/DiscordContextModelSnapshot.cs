@@ -128,6 +128,9 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
                             b1.Property<float>("OrderAxis")
                                 .HasColumnType("real");
 
+                            b1.Property<Guid>("SeedId")
+                                .HasColumnType("uniqueidentifier");
+
                             b1.Property<float>("UnityAxis")
                                 .HasColumnType("real");
 

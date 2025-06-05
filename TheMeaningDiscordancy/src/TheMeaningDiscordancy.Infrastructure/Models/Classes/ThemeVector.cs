@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TheMeaningDiscordancy.Core.Models.Interfaces;
 
-namespace TheMeaningDiscordancy.Infrastructure.Models.Entities;
+namespace TheMeaningDiscordancy.Infrastructure.Models.Classes;
 
-public class ThemeVectorEfc : IDiscordDataEntity
+public class ThemeVector : IDiscordDataEntity
 {
     [Key]
     public Guid ObjectKey { get; set; }
-    public float OrderAxis {  get; set; }
+    public Guid SeedId { get; set; }
+    public float OrderAxis { get; set; }
     public float CreationAxis { get; set; }
     public float DivineAxis { get; set; }
     public float UnityAxis { get; set; }
