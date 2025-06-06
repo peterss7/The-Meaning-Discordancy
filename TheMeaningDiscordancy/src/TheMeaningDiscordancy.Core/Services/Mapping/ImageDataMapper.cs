@@ -18,11 +18,7 @@ public class ImageDataMapper : BaseDiscordMapper<ImageDataDto, ImageDataEfc>, II
     public ImageDataEfc MapFromInputDto(CreateImageDataDto inputDto)
     {
         //ImageDataDto dto = base.MapDtoToDto<CreateImageDataDto, ImageDataDto>(inputDto);
-
-        throw new NotImplementedException();
-    }
-    private ImageDataDto MapToDto()
-    {
+        ImageDataEfc imageData = 
         throw new NotImplementedException();
     }
 }

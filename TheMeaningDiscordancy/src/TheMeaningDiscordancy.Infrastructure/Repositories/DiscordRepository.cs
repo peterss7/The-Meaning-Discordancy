@@ -7,9 +7,9 @@ namespace TheMeaningDiscordancy.Infrastructure.Repositories;
 public class DiscordRepository : IRepositoryWrapper
 {
     private readonly DiscordContext _context;
-    private IItemRepository _itemRepository;
-    private ITagRepository _tagRepository;
-    private IImageDataRepository _imageRepository;
+    private IItemRepository? _itemRepository;
+    private ITagRepository? _tagRepository;
+    private IImageDataRepository? _imageRepository;
     private readonly ILogger<IRepositoryWrapper> _logger;
 
     public DiscordRepository(DiscordContext context,
@@ -47,8 +47,8 @@ public class DiscordRepository : IRepositoryWrapper
     }
 
 
-    public void save()
+    public async Task SaveChangesAsync()
     {
-        throw new NotImplementedException();
+        await _context.SaveChangesAsync();
     }
 }

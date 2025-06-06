@@ -105,18 +105,24 @@ public class ItemService : IItemService
                 return result;
             }
 
-            if (imageDataResult.Value == null)
+            ImageDataEfc imageData = imageDataResult?.Value ?? new ImageDataEfc();
+
+            if (imageData == null || imageData.ObjectKey.Equals(Guid.Empty))
             {
                 result.Errors.Add(new DiscordError(BaseDiscordError.NullImageResult, "Image in input object is null."));
                 return result;
             }
 
-            ImageDataEfc imageData = imageDataResult.Value;
 
             _logger.LogCritical($"ImageData: {imageData?.ImagePath}, {imageData?.ImageName}");
+
+            item.ImageDataObjectKey = imageData!.ObjectKey;
+
             
-            _repository.ImageRepository.Update(imageData!);
-            await _repository.ImageRepository.SaveChangesAsync();
+            await _repository.ImageRepository.CreateAsync(imageData!);
+            await _repository.SaveChangesAsync();
+
+
 
             await _repository.ItemRepository.CreateAsync(item);
             await _repository.ItemRepository.SaveChangesAsync();

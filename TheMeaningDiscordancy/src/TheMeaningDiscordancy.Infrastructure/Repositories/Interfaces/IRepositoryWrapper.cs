@@ -5,5 +5,5 @@ public interface IRepositoryWrapper
     IItemRepository ItemRepository { get; }
     ITagRepository TagRepository { get; }
     IImageDataRepository ImageRepository { get; }
-    void save();
+    Task SaveChangesAsync();
 }

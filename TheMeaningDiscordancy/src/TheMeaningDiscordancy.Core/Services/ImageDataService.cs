@@ -29,7 +29,6 @@ public class ImageDataService : IImageDataService
 
         try
         {
-
             ImageDataEfc imageData  = _mapper.ImageDataMapper.MapFromInputDto(inputDto);
             await _repository.ImageRepository.CreateAsync(imageData);
             result.Value = imageData;

@@ -12,7 +12,9 @@
 using Microsoft.IdentityModel.Tokens;
 using TheMeaningDiscordancy.Core.Configuration;
 using TheMeaningDiscordancy.Core.Models.Errors;
+using TheMeaningDiscordancy.Core.Models.Utility.Dtos.Create;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Core.Services;
@@ -20,18 +22,21 @@ namespace TheMeaningDiscordancy.Core.Services;
 public class ImageUtilityService : IImageUtilityService
 {
     private readonly IWebHostEnvironment _env;
+    private readonly IMapperWrapper _mapper;
     private readonly ILogger<ImageUtilityService> _logger;
 
     public ImageUtilityService(IWebHostEnvironment env,
+        IMapperWrapper mapper,
         ILogger<ImageUtilityService> logger)
     {
         _env = env;
+        _mapper = mapper;
         _logger = logger;
     }
 
     public async Task<DiscordResult<ImageDataEfc>> SaveImageAsync(IFormFile file)
     {
-        DiscordResult<ImageDataEfc> result = new();
+        DiscordResult<ImageDataEfc> result = new() { Value = new ImageDataEfc()};
 
         try
         {
