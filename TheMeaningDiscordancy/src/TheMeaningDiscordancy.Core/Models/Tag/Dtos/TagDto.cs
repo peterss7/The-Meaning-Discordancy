@@ -23,11 +23,12 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
+using TheMeaningDiscordancy.Core.Models.Interfaces;
 using TheMeaningDiscordancy.Core.Models.Tag.Dtos.Create;
 
 namespace TheMeaningDiscordancy.Core.Models.Tag.Dtos;
 
-public class TagDto : ITagMap
+public class TagDto : IDiscordMap
 {
     public Guid? ObjectKey { get; set; }
     public int TagId { get; set; }

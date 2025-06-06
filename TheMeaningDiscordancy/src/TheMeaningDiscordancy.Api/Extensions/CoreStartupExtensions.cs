@@ -38,6 +38,7 @@ public static class CoreStartupExtensions
         services.AddScoped<IItemService, ItemService>();
         services.AddScoped<ITagService, TagService>();
         services.AddScoped<IImageDataService, ImageDataService>();
+        services.AddScoped<ISeedService, SeedService>();
         return services;
     }
 
@@ -49,7 +50,7 @@ public static class CoreStartupExtensions
 
     private static IServiceCollection ConfigureMappers(this IServiceCollection services)
     {
-        services.AddScoped<IMapperWrapper, MapperWrapper>();
+        services.AddScoped<IMapperWrapper, DiscordMapper>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         return services;
     }

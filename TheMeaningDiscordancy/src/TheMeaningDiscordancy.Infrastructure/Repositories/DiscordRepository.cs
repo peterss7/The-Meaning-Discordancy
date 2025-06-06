@@ -11,6 +11,7 @@ public class DiscordRepository : IRepositoryWrapper
     private ITagRepository? _tagRepository;
     private ISeedRepository? _seedRepository;
     private IThemeRepository? _themeRepository;
+    private IImageDataRepository? _imageDataRepository;
     private readonly ILogger<IRepositoryWrapper> _logger;
 
     public DiscordRepository(DiscordContext context,
@@ -25,6 +26,7 @@ public class DiscordRepository : IRepositoryWrapper
     public ITagRepository TagRepository => _tagRepository ??= new TagRepository(_context, _logger);
     public ISeedRepository SeedRepository => _seedRepository ??= new SeedRepository(_context, _logger);
     public IThemeRepository ThemeRepository => _themeRepository ??= new ThemeRepository(_context, _logger);
+    public IImageDataRepository ImageDataRepository => _imageDataRepository ??= new ImageDataRepository(_context, _logger);
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         _logger.LogWarning("Saving DB");

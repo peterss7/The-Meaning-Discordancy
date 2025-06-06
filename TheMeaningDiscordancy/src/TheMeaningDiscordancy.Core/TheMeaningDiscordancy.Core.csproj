@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Seed\**" />
+    <Compile Remove="Models\Theme\**" />
+    <Content Remove="Models\Seed\**" />
+    <Content Remove="Models\Theme\**" />
+    <EmbeddedResource Remove="Models\Seed\**" />
+    <EmbeddedResource Remove="Models\Theme\**" />
+    <None Remove="Models\Seed\**" />
+    <None Remove="Models\Theme\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
@@ -22,11 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheMeaningDiscordancy.Infrastructure\TheMeaningDiscordancy.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Theme\" />
-    <Folder Include="Models\Seed\" />
   </ItemGroup>
 
 </Project>

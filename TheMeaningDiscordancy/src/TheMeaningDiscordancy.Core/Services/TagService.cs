@@ -33,9 +33,9 @@ public class TagService : ITagService
         _logger = logger;
     }
 
-    public async Task<DiscordResult<TagEfc?>> GetTagAsync(int id)
+    public async Task<DiscordResult<TagEfc>> GetTagAsync(int id)
     {
-        DiscordResult<TagEfc?> result = new();
+        DiscordResult<TagEfc> result = new() { Value = new ()};
 
         try
         {
@@ -53,7 +53,7 @@ public class TagService : ITagService
 
     public async Task<DiscordResult<List<TagEfc>>> GetAllTagsAsync()
     {
-        DiscordResult<List<TagEfc>> result = new();
+        DiscordResult<List<TagEfc>> result = new() { Value = new ()};
 
         try
         {

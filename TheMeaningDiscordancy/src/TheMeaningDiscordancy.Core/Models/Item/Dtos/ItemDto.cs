@@ -23,11 +23,12 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
+using TheMeaningDiscordancy.Core.Models.Interfaces;
 using TheMeaningDiscordancy.Core.Models.Item.Dtos.Create;
 
 namespace TheMeaningDiscordancy.Core.Models.Item.Dtos;
 
-public class ItemDto : IItemMap
+public class ItemDto : IDiscordMap
 {
     public Guid? ObjectKey { get; set; }
     public int ItemId { get; set; }

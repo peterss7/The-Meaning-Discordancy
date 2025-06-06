@@ -12,8 +12,8 @@ using TheMeaningDiscordancy.Infrastructure.Data;
 namespace TheMeaningDiscordancy.Infrastructure.Migrations
 {
     [DbContext(typeof(DiscordContext))]
-    [Migration("20250605170809_ChangedTableName")]
-    partial class ChangedTableName
+    [Migration("20250606022216_ChangedItemEntity")]
+    partial class ChangedItemEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,29 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.ImageDataEfc", b =>
+                {
+                    b.Property<Guid>("ObjectKey")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.PrimitiveCollection<string>("SeedObjectKeys")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ObjectKey");
+
+                    b.ToTable("ImageData");
+                });
+
             modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.ItemEfc", b =>
                 {
                     b.Property<Guid>("ObjectKey")
@@ -34,11 +57,8 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("ImageDataObjectKey")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
@@ -50,6 +70,8 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ObjectKey");
+
+                    b.HasIndex("ImageDataObjectKey");
 
                     b.HasIndex("ItemId")
                         .IsUnique();
@@ -112,10 +134,18 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
 
                     b.HasKey("ObjectKey");
 
-                    b.HasIndex("ThemeId")
-                        .IsUnique();
+                    b.ToTable("Themes");
+                });
 
-                    b.ToTable("ThemeEfc");
+            modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.ItemEfc", b =>
+                {
+                    b.HasOne("TheMeaningDiscordancy.Infrastructure.Models.Entities.ImageDataEfc", "ImageData")
+                        .WithMany()
+                        .HasForeignKey("ImageDataObjectKey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ImageData");
                 });
 
             modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.SeedEfc", b =>

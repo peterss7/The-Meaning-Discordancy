@@ -30,7 +30,7 @@ public class ImageDataService : IImageDataService
         try
         {
             ImageDataEfc imageData  = _mapper.ImageDataMapper.MapFromInputDto(inputDto);
-            await _repository.ImageRepository.CreateAsync(imageData);
+            await _repository.ImageDataRepository.CreateAsync(imageData);
             result.Value = imageData;
             result.Success = true;
         }

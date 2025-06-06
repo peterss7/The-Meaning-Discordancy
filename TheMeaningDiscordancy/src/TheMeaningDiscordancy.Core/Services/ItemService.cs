@@ -26,12 +26,12 @@ public class ItemService : IItemService
     private readonly IMapperWrapper _mapper;
     private readonly ILogger<ItemService> _logger;
 
-    public ItemService(IItemRepository itemRepository,
+    public ItemService(IRepositoryWrapper repository,
         IImageUtilityService imageUtilityService,
         IMapperWrapper mapper,
         ILogger<ItemService> logger)
     {
-        _itemRepository = itemRepository;
+        _repository = repository;
         _imageUtilityService = imageUtilityService;
         _mapper = mapper;
         _logger = logger;
@@ -116,13 +116,13 @@ public class ItemService : IItemService
             item.ImageDataObjectKey = imageData!.ObjectKey;
 
             
-            await _repository.ImageRepository.CreateAsync(imageData!);
+            await _repository.ImageDataRepository.CreateAsync(imageData!);
             await _repository.SaveChangesAsync();
 
 
 
             await _repository.ItemRepository.CreateAsync(item);
-            await _repository.ItemRepository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
             result.Value = item;
         }
@@ -176,7 +176,7 @@ public class ItemService : IItemService
 
             ImageDataEfc imageData = imageDataResult.Value;
 
-            await _repository.ImageRepository.CreateAsync(imageData); 
+            await _repository.ImageDataRepository.CreateAsync(imageData); 
 
             item.ImageDataObjectKey = imageData.ObjectKey;
 

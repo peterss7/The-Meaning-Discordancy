@@ -7,6 +7,7 @@ using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Core.Services.Mapping;
 
+//public class ImageDataMapper : BaseDiscordMapper<ImageDataDto, ImageDataEfc>, IImageDataMapper
 public class ImageDataMapper : BaseDiscordMapper<ImageDataDto, ImageDataEfc>, IImageDataMapper
 {
     public ImageDataMapper(IMapper mapper,
@@ -17,8 +18,8 @@ public class ImageDataMapper : BaseDiscordMapper<ImageDataDto, ImageDataEfc>, II
 
     public ImageDataEfc MapFromInputDto(CreateImageDataDto inputDto)
     {
-        //ImageDataDto dto = base.MapDtoToDto<CreateImageDataDto, ImageDataDto>(inputDto);
-        ImageDataEfc imageData = 
-        throw new NotImplementedException();
+        ImageDataEfc imageData = _mapper.Map<ImageDataEfc>(inputDto);
+        imageData.SeedObjectKeys.Add(inputDto.SeedObjectKey);
+        return imageData;
     }
 }

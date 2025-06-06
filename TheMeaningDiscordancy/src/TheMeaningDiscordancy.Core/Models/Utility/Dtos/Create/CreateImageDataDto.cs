@@ -1,8 +1,9 @@
-﻿namespace TheMeaningDiscordancy.Core.Models.Utility.Dtos.Create;
+﻿using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 
-public class CreateImageDataDto : IImageDataMap
+namespace TheMeaningDiscordancy.Core.Models.Utility.Dtos.Create;
+
+public class CreateImageDataDto : IDiscordMap
 {
-    public Guid ItemObjectKey { get; set; } = Guid.Empty;
-    public string ImagePath { get; set; } = string.Empty;
-    public string ImageName { get; set; } = string.Empty;
+    public Guid SeedObjectKey { get; set; } = Guid.Empty;
+    public ImageDataDto ImageData { get; set; } = new();
 }

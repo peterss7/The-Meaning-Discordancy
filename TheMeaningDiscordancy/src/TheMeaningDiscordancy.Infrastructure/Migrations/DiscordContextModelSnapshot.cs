@@ -29,9 +29,15 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.PrimitiveCollection<string>("SeedObjectKeys")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ObjectKey");
@@ -110,6 +116,24 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.ThemeEfc", b =>
+                {
+                    b.Property<Guid>("ObjectKey")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThemeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ObjectKey");
+
+                    b.ToTable("Themes");
+                });
+
             modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.ItemEfc", b =>
                 {
                     b.HasOne("TheMeaningDiscordancy.Infrastructure.Models.Entities.ImageDataEfc", "ImageData")
@@ -119,6 +143,37 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("ImageData");
+                });
+
+            modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.SeedEfc", b =>
+                {
+                    b.OwnsOne("TheMeaningDiscordancy.Infrastructure.Models.Classes.ThemeVector", "ThemeVector", b1 =>
+                        {
+                            b1.Property<Guid>("SeedEfcObjectKey")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<float>("CreationAxis")
+                                .HasColumnType("real");
+
+                            b1.Property<float>("DivineAxis")
+                                .HasColumnType("real");
+
+                            b1.Property<float>("OrderAxis")
+                                .HasColumnType("real");
+
+                            b1.Property<float>("UnityAxis")
+                                .HasColumnType("real");
+
+                            b1.HasKey("SeedEfcObjectKey");
+
+                            b1.ToTable("Seeds");
+
+                            b1.WithOwner()
+                                .HasForeignKey("SeedEfcObjectKey");
+                        });
+
+                    b.Navigation("ThemeVector")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
