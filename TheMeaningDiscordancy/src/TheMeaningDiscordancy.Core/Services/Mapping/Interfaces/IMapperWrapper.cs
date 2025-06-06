@@ -5,4 +5,5 @@ public interface IMapperWrapper
     IImageDataMapper ImageDataMapper { get; }
     ITagMapper TagMapper { get; }
     IItemMapper ItemMapper { get; }
+    ISeedMapper SeedMapper { get; }
 }

@@ -1,25 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+﻿using TheMeaningDiscordancy.Core.Models.Seed.Dtos;
+using TheMeaningDiscordancy.Core.Services.Base;
 using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
-using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
+using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.Services.CoreServices;
 
-public class SeedService : ISeedService
+public class SeedService : BaseDiscordService<SeedDto, SeedEfc>, ISeedService
 {
-    private readonly IRepositoryWrapper _repository;
-    private readonly IMapperWrapper _mapper;
-    private readonly ILogger<IDiscordServiceWrapper> _logger;
-
-    public SeedService(IRepositoryWrapper repository,
-        IMapperWrapper mapper,
-        ILogger<IDiscordServiceWrapper> logger)
-    {
-        _repository = repository;
-        _mapper = mapper;
-        _logger = logger;
-    }
+    public SeedService(IBaseRepository<SeedEfc> repository,
+        IBaseDiscordMapper<SeedDto, SeedEfc> mapper,
+        ILogger<SeedService> logger)
+        : base(repository, mapper, logger)
+    {}
     public async Task SeedAsync()
     {
         //if (!(await _repository.ThemeRepository.AnyAsync()))

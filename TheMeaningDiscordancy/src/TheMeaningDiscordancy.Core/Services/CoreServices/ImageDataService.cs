@@ -1,60 +1,41 @@
 ﻿using TheMeaningDiscordancy.Core.Models.Errors;
-using TheMeaningDiscordancy.Core.Models.Utility.Dtos.Create;
+using TheMeaningDiscordancy.Core.Models.Utility.Dtos;
+using TheMeaningDiscordancy.Core.Services.Base;
 using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
-using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.Services.CoreServices;
 
-public class ImageDataService : IImageDataService
+public class ImageDataService : BaseDiscordService<ImageDataDto, ImageDataEfc>, IImageDataService
 {
-    private readonly IRepositoryWrapper _repository;
-    private readonly IMapperWrapper _mapper;
-    private readonly ILogger<IDiscordServiceWrapper> _logger;
-
-    public ImageDataService(IRepositoryWrapper repository,
-        IMapperWrapper mapper,
-        ILogger<IDiscordServiceWrapper> logger)
+    public ImageDataService(IBaseRepository<ImageDataEfc> repository,
+        IBaseDiscordMapper<ImageDataDto, ImageDataEfc> mapper,
+        ILogger<ImageDataService> logger)
+        : base(repository, mapper, logger)
     {
-        _repository = repository;
-        _mapper = mapper;
-        _logger = logger;
     }
 
-    public async Task<DiscordResult<ImageDataEfc>> CreateImageDataAsync(CreateImageDataDto inputDto)
+    public override async Task<DiscordResult<ImageDataEfc>> CreateAsync(ImageDataDto inputDto)
     {
         DiscordResult<ImageDataEfc> result = new();
 
         try
         {
-            ImageDataEfc imageData = _mapper.ImageDataMapper.MapFromInputDto(inputDto);
-            await _repository.ImageDataRepository.CreateAsync(imageData);
+            ImageDataEfc imageData = _mapper.MapToEntity(inputDto);
+            await _repository.CreateAsync(imageData);
+            await _repository.SaveChangesAsync();
             result.Value = imageData;
             result.Success = true;
+
         }
         catch (Exception ex)
         {
-            _logger.LogError("An error occurred in the CreateImageDataAsync Service Method, {Exception}", ex.Message);
-            result.Errors.Add(new DiscordError(BaseDiscordError.ExceptionError, "An exception occurred in the create image data async service method..."));
+            _logger.LogError(ex, "An error occurred in the CreateAsync method of Image Data Service");
+            result.Errors.Add(new DiscordError(BaseDiscordError.ExceptionError, ex.Message));
         }
 
         return result;
-    }
-
-    public Task<DiscordResult<List<ImageDataEfc>>> GetAllImageDataAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<DiscordResult<ImageDataEfc>> GetImageDataAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<DiscordResult<ImageDataEfc>> UpdateImageDataAsync(ImageDataEfc imageData)
-    {
-        throw new NotImplementedException();
     }
 }

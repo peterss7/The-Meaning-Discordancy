@@ -8,10 +8,12 @@ namespace TheMeaningDiscordancy.Api.Extensions;
 
 public static class InfrastructureStartupExtensions
 {
-    public static void ConfigureInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
+    public static IServiceCollection ConfigureInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
     {
-        services.ConfigureDbContext(configuration);
-        services.ConfigureRespositories();
+        services
+            .ConfigureDbContext(configuration)
+            .ConfigureRespositories();
+        return services;
     }
 
     public static async Task SeedSeeds(this IApplicationBuilder app)
@@ -22,19 +24,23 @@ public static class InfrastructureStartupExtensions
         var seeder = scope.ServiceProvider.GetRequiredService<ISeedService>();
         await seeder.SeedAsync();
     }
-    private static void ConfigureDbContext(this IServiceCollection services, ConfigurationManager configuration)
+    private static IServiceCollection ConfigureDbContext(this IServiceCollection services, ConfigurationManager configuration)
     {
         services.AddDbContext<DiscordContext>(options =>
           options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        return services;
     }
 
-    private static void ConfigureRespositories(this IServiceCollection services)
+    private static IServiceCollection ConfigureRespositories(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IRepositoryWrapper), typeof(DiscordRepository));
-        services.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
-        services.AddScoped(typeof(ITagRepository), typeof(TagRepository));
-        services.AddScoped(typeof(ISeedRepository), typeof(SeedRepository));    
-        services.AddScoped(typeof(IThemeRepository), typeof(ThemeRepository));
+        services.AddScoped<IRepositoryWrapper, DiscordRepository>();
+
+        services.AddScoped<IImageDataRepository, ImageDataRepository>();
+        services.AddScoped<IItemRepository, ItemRepository>();
+        services.AddScoped<ITagRepository, TagRepository>();
+        services.AddScoped<ISeedRepository, SeedRepository>();
+        services.AddScoped<IThemeRepository, ThemeRepository>();
+        return services;
     }
 
 }

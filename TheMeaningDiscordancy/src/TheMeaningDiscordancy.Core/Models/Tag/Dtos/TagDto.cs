@@ -23,8 +23,8 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-using TheMeaningDiscordancy.Core.Models.Interfaces;
 using TheMeaningDiscordancy.Core.Models.Tag.Dtos.Create;
+using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.Models.Tag.Dtos;
 

@@ -11,40 +11,39 @@
 
 
 
+using TheMeaningDiscordancy.Core.Services;
 using TheMeaningDiscordancy.Core.Services.CoreServices;
 using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping;
 using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
-using TheMeaningDiscordancy.Infrastructure.Repositories;
-using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Api.Extensions;
 
 public static class CoreStartupExtensions
 {
-    public static void ConfigureCoreServices(this IServiceCollection services)
+    public static IServiceCollection ConfigureCoreServices(this IServiceCollection services)
     {
         services
             .ConfigureMappers()
-            .ConfigureServices()
-            .ConfigureRespositories();
+            .ConfigureServices();
+        return services;
     }
 
     private static IServiceCollection ConfigureServices(this IServiceCollection services)
     {
+        services.AddScoped<IDiscordServiceWrapper, DiscordServiceWrapper>();
         services.AddScoped<IImageUtilityService, ImageUtilityService>();
-        services.AddScoped<IItemService, ItemService>();
-        services.AddScoped<ITagService, TagService>();
-        services.AddScoped<IImageDataService, ImageDataService>();
-        services.AddScoped<ISeedService, SeedService>();
-        return services;
-    }
 
-    private static IServiceCollection ConfigureRespositories(this IServiceCollection services)
-    {
-        services.AddScoped(typeof(IRepositoryWrapper), typeof(DiscordRepository));
+        services.AddScoped<ISeedService>(provider =>
+           provider.GetRequiredService<IDiscordServiceWrapper>().SeedService);
+
+        //services.AddScoped<IItemService, ItemService>();
+        //services.AddScoped<ITagService, TagService>();
+        //services.AddScoped<ISeedService, SeedService>();
         return services;
     }
+      
 
     private static IServiceCollection ConfigureMappers(this IServiceCollection services)
     {

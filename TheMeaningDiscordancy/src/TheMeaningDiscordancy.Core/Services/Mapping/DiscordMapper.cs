@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Mapping.Models;
 
 namespace TheMeaningDiscordancy.Core.Services.Mapping;
 
@@ -10,6 +11,8 @@ public class DiscordMapper : IMapperWrapper
     private ImageDataMapper? _imageDataMapper;
     private TagMapper? _tagMapper;
     private ItemMapper? _itemMapper;
+    private SeedMapper? _seedMapper;
+    private ThemeMapper? _themeMapper;
 
     public DiscordMapper(IMapper mapper,
         ILogger<IMapperWrapper> logger)
@@ -20,4 +23,7 @@ public class DiscordMapper : IMapperWrapper
     public IImageDataMapper ImageDataMapper => _imageDataMapper ??= new ImageDataMapper(_mapper, _logger);
     public IItemMapper ItemMapper => _itemMapper ??= new ItemMapper(_mapper, _logger);
     public ITagMapper TagMapper => _tagMapper ??= new TagMapper(_mapper, _logger);
+    public ISeedMapper SeedMapper => _seedMapper ??= new SeedMapper(_mapper, _logger);
+    public IThemeMapper ThemeMapper => _themeMapper ??= new ThemeMapper(_mapper, _logger);
+
 }

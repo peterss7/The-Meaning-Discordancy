@@ -15,29 +15,29 @@ public static class StartupExtensions
 {
     public static void ConfigureStartupServices(this IServiceCollection services, ConfigurationManager configuration)
     {
-        services.ConfigureControllers();
-        services.ConfigureSwagger();
-        
-        services.ConfigureCoreServices();
-
-        services.ConfigureInfrastructure(configuration);
-        
-        services.ConfigureCors();
+        services
+            .ConfigureControllers()
+            .ConfigureSwagger()
+            .ConfigureInfrastructure(configuration)
+            .ConfigureCoreServices()
+            .ConfigureCors();
     }
 
-    private static void ConfigureSwagger(this IServiceCollection services)
+    private static IServiceCollection ConfigureSwagger(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        return services;
     }
 
-    private static void ConfigureControllers(this IServiceCollection services)
+    private static IServiceCollection ConfigureControllers(this IServiceCollection services)
     {
         services.AddControllers();
+        return services;
     }
 
     
-    private static void ConfigureCors(this IServiceCollection services)
+    private static IServiceCollection ConfigureCors(this IServiceCollection services)
     {
         services.AddCors(options =>
         {
@@ -50,5 +50,6 @@ public static class StartupExtensions
                         .AllowAnyMethod();
                 });
         });
+        return services;
     }
 }

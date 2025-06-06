@@ -1,4 +1,4 @@
-﻿using TheMeaningDiscordancy.Core.Models.Interfaces;
+﻿using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 
 namespace TheMeaningDiscordancy.Core.Models.Utility.Dtos;
 

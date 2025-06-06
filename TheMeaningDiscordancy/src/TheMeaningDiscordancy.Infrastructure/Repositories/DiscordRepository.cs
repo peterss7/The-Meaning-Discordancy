@@ -7,12 +7,13 @@ namespace TheMeaningDiscordancy.Infrastructure.Repositories;
 public class DiscordRepository : IRepositoryWrapper
 {
     private readonly DiscordContext _context;
+    private readonly ILogger<IRepositoryWrapper> _logger;
+
     private IItemRepository? _itemRepository;
     private ITagRepository? _tagRepository;
     private ISeedRepository? _seedRepository;
     private IThemeRepository? _themeRepository;
     private IImageDataRepository? _imageDataRepository;
-    private readonly ILogger<IRepositoryWrapper> _logger;
 
     public DiscordRepository(DiscordContext context,
         ILogger<IRepositoryWrapper> logger)

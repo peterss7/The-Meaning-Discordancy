@@ -10,6 +10,7 @@ public class SeedEfc : IDiscordDataEntity
     public Guid ObjectKey { get; set; }
     public int SeedId { get; set; }
     public string Title { get; set; } = string.Empty;
-    public string ImagePath { get; set; } = string.Empty;
+    public Guid ImageDataObjectKey { get; set; }
+    public ImageDataEfc ImageData { get; set; } = new();
     public ThemeVector ThemeVector { get; set; } = new();
 }
