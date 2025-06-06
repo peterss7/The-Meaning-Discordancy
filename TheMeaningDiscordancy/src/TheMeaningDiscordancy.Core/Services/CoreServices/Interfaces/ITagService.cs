@@ -11,15 +11,17 @@
 
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Tag.Dtos;
+using TheMeaningDiscordancy.Core.Models.Utility.Dtos;
+using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 
-public interface ITagService
+public interface ITagService : IBaseDiscordService<TagDto, TagEfc>
 {
-    Task<DiscordResult<TagEfc>> GetTagAsync(int id);
-    Task<DiscordResult<List<TagEfc>>> GetAllTagsAsync();
-    Task<DiscordResult<TagEfc>> CreateTagAsync(TagDto inputDto);
+    //Task<DiscordResult<TagEfc>> GetTagAsync(int id);
+    //Task<DiscordResult<List<TagEfc>>> GetAllTagsAsync();
+    //Task<DiscordResult<TagEfc>> CreateTagAsync(TagDto inputDto);
     //Task<DiscordResult<TagEfc>> UpdateTagAsync(TagDto inputDto, int id);
     //Task<DiscordResult<TagEfc>> DeleteTagAsync(int id);
 

@@ -18,6 +18,7 @@ public class ImageDataEfc : IDiscordDataEntity
 {
     [Key]
     public Guid ObjectKey { get; set; } = Guid.Empty;
+    public int ImageDataId { get; set; }
     public string ImageName { get; set; } = string.Empty;
     public string ImagePath { get; set; } = string.Empty;
     public List<Guid> SeedObjectKeys { get; set; } = new();       

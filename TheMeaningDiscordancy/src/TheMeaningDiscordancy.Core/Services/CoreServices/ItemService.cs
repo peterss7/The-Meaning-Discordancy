@@ -21,14 +21,14 @@ namespace TheMeaningDiscordancy.Core.Services.CoreServices;
 
 public class ItemService : BaseDiscordService<ItemDto, ItemEfc>, IItemService
 {
-    private readonly IImageUtilityService _imageUtilityService;
+    //private readonly IImageUtilityService _imageUtilityService;
     public ItemService(IBaseRepository<ItemEfc> repository,
-        IImageUtilityService imageUtilityService,
+        //IImageUtilityService imageUtilityService,
         IBaseDiscordMapper<ItemDto, ItemEfc> mapper,
         ILogger<ItemService> logger)
         : base(repository, mapper, logger)
     {
-        _imageUtilityService = imageUtilityService;
+        //_imageUtilityService = imageUtilityService;
     }
 
     public Task<DiscordResult<ItemEfc>> CreateItemAsync(ItemDto inputDto)

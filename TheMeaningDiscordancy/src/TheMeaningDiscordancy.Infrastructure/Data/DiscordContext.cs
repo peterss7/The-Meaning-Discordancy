@@ -34,7 +34,10 @@ public class DiscordContext : DbContext
     {
         modelBuilder.Entity<ItemEfc>()
             .HasIndex(p => p.ItemId)
-            .IsUnique();       
+            .IsUnique();
+        modelBuilder.Entity<ImageDataEfc>()
+            .HasIndex(p => p.ImageDataId)
+            .IsUnique();
         modelBuilder.Entity<SeedEfc>()
             .OwnsOne(s => s.ThemeVector);
     }

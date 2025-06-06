@@ -10,12 +10,12 @@
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 using TheMeaningDiscordancy.Core.Models.Errors;
-using TheMeaningDiscordancy.Infrastructure.Models.Entities;
+using TheMeaningDiscordancy.Core.Models.Utility.Dtos;
 
 namespace TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 
 public interface IImageUtilityService
 {
-    Task<DiscordResult<ImageDataEfc>> SaveImageAsync(IFormFile file);
+    Task<DiscordResult<ImageDataDto>> SaveImageAsync(IFormFile file, string imageFolder);
     string GetImageContentType(string path);
 }

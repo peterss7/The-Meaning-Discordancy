@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheMeaningDiscordancy.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TheMeaningDiscordancy.Infrastructure.Data;
 namespace TheMeaningDiscordancy.Infrastructure.Migrations
 {
     [DbContext(typeof(DiscordContext))]
-    partial class DiscordContextModelSnapshot : ModelSnapshot
+    [Migration("20250606183406_ItemDataItemDataIdAdded")]
+    partial class ItemDataItemDataIdAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

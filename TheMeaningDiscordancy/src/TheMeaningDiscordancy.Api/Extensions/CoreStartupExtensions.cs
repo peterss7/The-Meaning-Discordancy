@@ -37,6 +37,14 @@ public static class CoreStartupExtensions
 
         services.AddScoped<ISeedService>(provider =>
            provider.GetRequiredService<IDiscordServiceWrapper>().SeedService);
+        services.AddScoped<ITagService>(provider =>
+           provider.GetRequiredService<IDiscordServiceWrapper>().TagService);
+        services.AddScoped<IItemService>(provider =>
+           provider.GetRequiredService<IDiscordServiceWrapper>().ItemService);
+        //services.AddScoped<IThemeService>(provider =>
+        //   provider.GetRequiredService<IDiscordServiceWrapper>().ThemeService);
+        services.AddScoped<IImageDataService>(provider =>
+           provider.GetRequiredService<IDiscordServiceWrapper>().ImageDataService);
 
         //services.AddScoped<IItemService, ItemService>();
         //services.AddScoped<ITagService, TagService>();

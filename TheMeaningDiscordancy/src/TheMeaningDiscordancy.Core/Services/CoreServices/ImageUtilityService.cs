@@ -12,6 +12,7 @@
 using Microsoft.IdentityModel.Tokens;
 using TheMeaningDiscordancy.Core.Configuration;
 using TheMeaningDiscordancy.Core.Models.Errors;
+using TheMeaningDiscordancy.Core.Models.Utility.Dtos;
 using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
@@ -33,13 +34,13 @@ public class ImageUtilityService : IImageUtilityService
         _logger = logger;
     }
 
-    public async Task<DiscordResult<ImageDataEfc>> SaveImageAsync(IFormFile file)
+    public async Task<DiscordResult<ImageDataDto>> SaveImageAsync(IFormFile file, string imageFolder)
     {
-        DiscordResult<ImageDataEfc> result = new() { Value = new ImageDataEfc() };
+        DiscordResult<ImageDataDto> result = new() { Value = new ImageDataDto() };
 
         try
         {
-            string targetFolder = Path.Combine(_env.WebRootPath, ItemConstants.ITEM_IMAGE_FOLDER);
+            string targetFolder = Path.Combine(_env.WebRootPath, imageFolder);
             Directory.CreateDirectory(targetFolder);
 
             string fileName = $"{Guid.NewGuid()}_{file.FileName.Substring(0, file.FileName.LastIndexOf('.'))}{Path.GetExtension(file.FileName)}";
@@ -55,7 +56,11 @@ public class ImageUtilityService : IImageUtilityService
             {
                 await file.CopyToAsync(stream);
             }
-            result.Value = new ImageDataEfc(fileName, filePath);
+            result.Value = new ImageDataDto()
+            {
+                ImageName = file.Name,
+                ImagePath = filePath,
+            };
         }
         catch (Exception ex)
         {

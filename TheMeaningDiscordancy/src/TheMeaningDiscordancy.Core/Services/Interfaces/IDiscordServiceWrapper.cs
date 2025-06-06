@@ -4,6 +4,10 @@ namespace TheMeaningDiscordancy.Core.Services.Interfaces;
 
 public interface IDiscordServiceWrapper
 {
-    IImageDataService ImageDataService { get; }
+    IItemService ItemService { get; }
+    ITagService TagService { get; }
     ISeedService SeedService { get; }
+    //IThemeService ThemeService { get; }
+    IImageDataService ImageDataService { get; }
+
 }
