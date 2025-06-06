@@ -2,6 +2,7 @@
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Utility.Dtos.Create;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
@@ -10,11 +11,11 @@ namespace TheMeaningDiscordancy.Core.Services;
 public class ImageDataService : IImageDataService
 {
     private readonly IRepositoryWrapper _repository;
-    private readonly IDiscordMappingService _mapper;
+    private readonly IMapperWrapper _mapper;
     private readonly ILogger<ImageDataService> _logger;
 
     public ImageDataService(IRepositoryWrapper repository,
-        IDiscordMappingService mapper,
+        IMapperWrapper mapper,
         ILogger<ImageDataService> logger)
     {
         _repository = repository;
@@ -22,14 +23,14 @@ public class ImageDataService : IImageDataService
         _logger = logger;
     }
 
-    public async Task<DiscordResult<ImageDataEfc>> CreateImageDataAsync(CreateImageDataDto imageDataDto)
+    public async Task<DiscordResult<ImageDataEfc>> CreateImageDataAsync(CreateImageDataDto inputDto)
     {
         DiscordResult<ImageDataEfc> result = new();
 
         try
         {
-            ImageDataEfc imageData = new ImageDataEfc();
-            _mapper.MapDtoToEntity<CreateImageDataDto, ImageDataEfc>(imageDataDto, imageData);
+
+            ImageDataEfc imageData  = _mapper.ImageDataMapper.MapFromInputDto(inputDto);
             await _repository.ImageRepository.CreateAsync(imageData);
             result.Value = imageData;
             result.Success = true;

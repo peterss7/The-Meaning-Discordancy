@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Item.Dtos;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
@@ -23,13 +24,13 @@ public class ItemService : IItemService
     private readonly IRepositoryWrapper _repository;
     private readonly IImageDataService _imageDataService;
     private readonly IImageUtilityService _imageUtilityService;
-    private readonly IItemMappingService _mapper;
+    private readonly IMapperWrapper _mapper;
     private readonly ILogger<ItemService> _logger;
 
     public ItemService(IRepositoryWrapper repository,
         IImageDataService imageDataService,
         IImageUtilityService imageUtilityService,
-        IItemMappingService mapper,
+        IMapperWrapper mapper,
         ILogger<ItemService> logger)
     {
         _repository = repository;
@@ -95,8 +96,8 @@ public class ItemService : IItemService
             {
                 result.Errors.Add(new DiscordError(BaseDiscordError.NullInput, "Image data is null."));
             }
-            ItemEfc item = new();
-            _mapper.MapDtoToEntity<ItemDto, ItemEfc>(inputDto, item);
+
+            ItemEfc item = _mapper.ItemMapper.MapToEntity(inputDto);
             DiscordResult<ImageDataEfc> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image!);
 
             if (imageDataResult.HasError)
@@ -155,7 +156,7 @@ public class ItemService : IItemService
 
             ItemEfc item = itemResult.Value;
 
-            _mapper.MapDtoToEntity<ItemDto, ItemEfc>(inputDto, item);
+            _mapper.ItemMapper.MapOntoEntity(inputDto, item);
             DiscordResult<ImageDataEfc> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image);
 
             if (imageDataResult.HasError)

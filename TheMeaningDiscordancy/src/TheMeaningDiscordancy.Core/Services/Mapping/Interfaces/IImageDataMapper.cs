@@ -1,10 +1,10 @@
 ﻿using TheMeaningDiscordancy.Core.Models.Utility.Dtos;
-using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces.Base;
+using TheMeaningDiscordancy.Core.Models.Utility.Dtos.Create;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 
-public interface IImageDataMapper : IBaseMapper<ImageDataEfc>
+public interface IImageDataMapper : IBaseDiscordMapper<ImageDataDto, ImageDataEfc>
 {
-    void MapImageDataInput(ImageDataDto imageData);
+    ImageDataEfc MapFromInputDto(CreateImageDataDto dto);
 }

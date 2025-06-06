@@ -12,6 +12,7 @@
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Tag.Dtos;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
@@ -19,15 +20,15 @@ namespace TheMeaningDiscordancy.Core.Services;
 
 public class TagService : ITagService
 {
-    private readonly ITagRepository _tagRepository;
-    private readonly IDiscordMappingService _mapper;
+    private readonly IRepositoryWrapper _repository;
+    private readonly IMapperWrapper _mapper;
     private readonly ILogger<TagService> _logger;
 
-    public TagService(ITagRepository tagRepository,
-        IDiscordMappingService mapper,
+    public TagService(IRepositoryWrapper repository,
+        IMapperWrapper mapper,
         ILogger<TagService> logger)
     {
-        _tagRepository = tagRepository;
+        _repository = repository;
         _mapper = mapper;
         _logger = logger;
     }
@@ -38,7 +39,7 @@ public class TagService : ITagService
 
         try
         {
-            TagEfc? tag = await _tagRepository.GetAsync(id);
+            TagEfc? tag = await _repository.TagRepository.GetAsync(id);
             result.Value = tag;
         }
         catch (Exception ex)
@@ -72,11 +73,10 @@ public class TagService : ITagService
 
         try
         {
-            TagEfc tag = new TagEfc();
-            _mapper.MapDtoToEntity<TagDto, TagEfc>(inputDto, tag);
+            TagEfc tag = _mapper.TagMapper.MapToEntity(inputDto);
 
-            await _tagRepository.CreateAsync(tag);
-            await _tagRepository.SaveChangesAsync();
+            await _repository.TagRepository.CreateAsync(tag);
+            await _repository.TagRepository.SaveChangesAsync();
 
             result.Value = tag;
         }

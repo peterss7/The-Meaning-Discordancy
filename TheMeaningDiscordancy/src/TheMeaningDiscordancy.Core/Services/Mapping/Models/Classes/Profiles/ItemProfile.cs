@@ -10,15 +10,15 @@
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 using AutoMapper;
-using TheMeaningDiscordancy.Core.Models.Tag.Dtos;
+using TheMeaningDiscordancy.Core.Models.Item.Dtos;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
-namespace TheMeaningDiscordancy.Core.Services.Mapping;
+namespace TheMeaningDiscordancy.Core.Services.Mapping.Models.Classes.Profiles;
 
-public class TagProfile : Profile
+public class ItemProfile : Profile
 {
-    public TagProfile()
+    public ItemProfile()
     {
-        CreateMap<TagDto, TagEfc>();
+        CreateMap<ItemDto, ItemEfc>();
     }
 }

@@ -11,9 +11,12 @@
 
 
 
+using System.Runtime.CompilerServices;
 using TheMeaningDiscordancy.Core.Services;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping;
+using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Mapping.Models.Classes.Profiles;
 using TheMeaningDiscordancy.Infrastructure.Repositories;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
@@ -23,28 +26,31 @@ public static class CoreStartupExtensions
 {
     public static void ConfigureCoreServices(this IServiceCollection services)
     {
-        services.ConfigureServices();
-        services.ConfigureRespositories();
+        services
+            .ConfigureMappers()
+            .ConfigureServices()
+            .ConfigureRespositories();
     }
 
-    private static void ConfigureServices(this IServiceCollection services)
+    private static IServiceCollection ConfigureServices(this IServiceCollection services)
     {
         services.AddScoped<IImageUtilityService, ImageUtilityService>();
-
-        services.AddScoped(typeof(IDiscordMappingService), typeof(DiscordMappingService));
-
         services.AddScoped<IItemService, ItemService>();
-        services.AddScoped<IItemMappingService, ItemMappingService>();
-        services.AddAutoMapper(typeof(ItemProfile));
-
         services.AddScoped<ITagService, TagService>();
-        services.AddScoped<ITagMappingService, TagMappingService>();
-        services.AddAutoMapper(typeof(TagProfile));
+        services.AddScoped<IImageDataService, ImageDataService>();
+        return services;
     }
 
-    private static void ConfigureRespositories(this IServiceCollection services)
+    private static IServiceCollection ConfigureRespositories(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
-        services.AddScoped(typeof(ITagRepository), typeof(TagRepository));
+        services.AddScoped(typeof(IRepositoryWrapper), typeof(DiscordRepository));
+        return services;
+    }
+
+    private static IServiceCollection ConfigureMappers(this IServiceCollection services)
+    {
+        services.AddScoped<IMapperWrapper, MapperWrapper>();
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        return services;
     }
 }
