@@ -10,17 +10,12 @@
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 using TheMeaningDiscordancy.Core.Models.Errors;
-using TheMeaningDiscordancy.Core.Models.Item.Dtos;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
-namespace TheMeaningDiscordancy.Core.Services.Interfaces;
+namespace TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 
-public interface IItemService
+public interface IImageUtilityService
 {
-    Task<DiscordResult<ItemEfc>> GetItemAsync(int id);
-    Task<DiscordResult<List<ItemEfc>>> GetAllItemsAsync();
-    Task<DiscordResult<ItemEfc>> CreateItemAsync(ItemDto inputDto);
-    Task<DiscordResult<ItemEfc>> UpdateItemAsync(ItemDto inputDto, int id);
-    Task<DiscordResult<ItemEfc>> DeleteItemAsync(int id);
-
+    Task<DiscordResult<ImageDataEfc>> SaveImageAsync(IFormFile file);
+    string GetImageContentType(string path);
 }

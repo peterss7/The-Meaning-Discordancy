@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Item.Dtos;
 using TheMeaningDiscordancy.Core.Models.Item.Dtos.Create;
-using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
 namespace TheMeaningDiscordancy.Api.Controllers;

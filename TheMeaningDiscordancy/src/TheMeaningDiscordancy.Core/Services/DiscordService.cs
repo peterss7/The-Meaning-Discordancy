@@ -1,5 +1,10 @@
-﻿namespace TheMeaningDiscordancy.Core.Services;
+﻿using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Interfaces;
 
-public class DiscordService
+namespace TheMeaningDiscordancy.Core.Services;
+
+public abstract class DiscordService : IDiscordServiceWrapper
 {
+
+    public IImageDataService ImageDataService => throw new NotImplementedException();
 }

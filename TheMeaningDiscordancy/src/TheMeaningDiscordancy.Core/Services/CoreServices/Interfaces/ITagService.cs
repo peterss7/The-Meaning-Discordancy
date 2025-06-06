@@ -13,7 +13,7 @@ using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Tag.Dtos;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
-namespace TheMeaningDiscordancy.Core.Services.Interfaces;
+namespace TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 
 public interface ITagService
 {

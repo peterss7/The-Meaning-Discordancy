@@ -10,11 +10,11 @@
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 using Microsoft.AspNetCore.Mvc;
-using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Models.Tag.Dtos;
 using TheMeaningDiscordancy.Core.Models.Tag.Dtos.Create;
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
+using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 
 namespace TheMeaningDiscordancy.Api.DiscordApi;
 

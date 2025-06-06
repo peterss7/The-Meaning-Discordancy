@@ -19,7 +19,6 @@ public class DiscordRepository : IRepositoryWrapper
     {
         _context = context;
         _logger = logger;
-
     }
 
     public IItemRepository ItemRepository =>  _itemRepository ??= new ItemRepository(_context, _logger);

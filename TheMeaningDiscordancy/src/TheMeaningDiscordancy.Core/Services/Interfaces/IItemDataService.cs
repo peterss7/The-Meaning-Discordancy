@@ -1,6 +1,5 @@
 ﻿namespace TheMeaningDiscordancy.Core.Services.Interfaces;
 
-public interface ISeedService
+public interface IItemDataService : IDiscordService<ItemDataEfc>
 {
-    public Task SeedAsync();
 }

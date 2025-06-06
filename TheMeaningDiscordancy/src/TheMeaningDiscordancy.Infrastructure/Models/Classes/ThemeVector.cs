@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheMeaningDiscordancy.Core.Models.Interfaces;
-
-namespace TheMeaningDiscordancy.Infrastructure.Models.Classes;
+﻿namespace TheMeaningDiscordancy.Infrastructure.Models.Classes;
 
 public class ThemeVector
 {

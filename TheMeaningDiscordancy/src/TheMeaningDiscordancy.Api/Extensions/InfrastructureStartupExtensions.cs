@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TheMeaningDiscordancy.Core.Services;
 using TheMeaningDiscordancy.Infrastructure.Data;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Repositories;
-using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 
 namespace TheMeaningDiscordancy.Api.Extensions;
 

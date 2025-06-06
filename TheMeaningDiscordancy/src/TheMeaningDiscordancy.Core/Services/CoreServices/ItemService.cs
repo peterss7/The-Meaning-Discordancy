@@ -12,29 +12,29 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Item.Dtos;
+using TheMeaningDiscordancy.Core.Services.Base;
+using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
+using TheMeaningDiscordancy.Infrastructure.Repositories.Base;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
-namespace TheMeaningDiscordancy.Core.Services;
+namespace TheMeaningDiscordancy.Core.Services.CoreServices;
 
-public class ItemService : IItemService
+public class ItemService : BaseDiscordService<ItemEfc>, IItemService
 {
     private readonly IRepositoryWrapper _repository;
     private readonly IImageUtilityService _imageUtilityService;
     private readonly IMapperWrapper _mapper;
-    private readonly ILogger<ItemService> _logger;
+    private readonly ILogger<IDiscordServiceWrapper> _logger;
 
     public ItemService(IRepositoryWrapper repository,
         IImageUtilityService imageUtilityService,
         IMapperWrapper mapper,
-        ILogger<ItemService> logger)
+        ILogger<IDiscordServiceWrapper> logger)
+        : base(repository, imageUtilityService, mapper, logger)
     {
-        _repository = repository;
-        _imageUtilityService = imageUtilityService;
-        _mapper = mapper;
-        _logger = logger;
     }
 
     public async Task<DiscordResult<ItemEfc>> GetItemAsync(int id)
@@ -115,7 +115,7 @@ public class ItemService : IItemService
 
             item.ImageDataObjectKey = imageData!.ObjectKey;
 
-            
+
             await _repository.ImageDataRepository.CreateAsync(imageData!);
             await _repository.SaveChangesAsync();
 
@@ -176,7 +176,7 @@ public class ItemService : IItemService
 
             ImageDataEfc imageData = imageDataResult.Value;
 
-            await _repository.ImageDataRepository.CreateAsync(imageData); 
+            await _repository.ImageDataRepository.CreateAsync(imageData);
 
             item.ImageDataObjectKey = imageData.ObjectKey;
 

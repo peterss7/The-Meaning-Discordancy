@@ -11,12 +11,10 @@
 
 
 
-using System.Runtime.CompilerServices;
-using TheMeaningDiscordancy.Core.Services;
-using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Core.Services.CoreServices;
+using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping;
 using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
-using TheMeaningDiscordancy.Core.Services.Mapping.Models.Classes.Profiles;
 using TheMeaningDiscordancy.Infrastructure.Repositories;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 

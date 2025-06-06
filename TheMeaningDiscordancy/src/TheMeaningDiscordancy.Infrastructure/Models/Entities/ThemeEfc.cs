@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using TheMeaningDiscordancy.Core.Models.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Models.Entities;

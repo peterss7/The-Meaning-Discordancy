@@ -11,22 +11,23 @@
 
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Tag.Dtos;
+using TheMeaningDiscordancy.Core.Services.CoreServices.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
 using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
-namespace TheMeaningDiscordancy.Core.Services;
+namespace TheMeaningDiscordancy.Core.Services.CoreServices;
 
 public class TagService : ITagService
 {
     private readonly IRepositoryWrapper _repository;
     private readonly IMapperWrapper _mapper;
-    private readonly ILogger<TagService> _logger;
+    private readonly ILogger<IDiscordServiceWrapper> _logger;
 
     public TagService(IRepositoryWrapper repository,
         IMapperWrapper mapper,
-        ILogger<TagService> logger)
+        ILogger<IDiscordServiceWrapper> logger)
     {
         _repository = repository;
         _mapper = mapper;
@@ -35,7 +36,7 @@ public class TagService : ITagService
 
     public async Task<DiscordResult<TagEfc>> GetTagAsync(int id)
     {
-        DiscordResult<TagEfc> result = new() { Value = new ()};
+        DiscordResult<TagEfc> result = new() { Value = new() };
 
         try
         {
@@ -53,7 +54,7 @@ public class TagService : ITagService
 
     public async Task<DiscordResult<List<TagEfc>>> GetAllTagsAsync()
     {
-        DiscordResult<List<TagEfc>> result = new() { Value = new ()};
+        DiscordResult<List<TagEfc>> result = new() { Value = new() };
 
         try
         {
