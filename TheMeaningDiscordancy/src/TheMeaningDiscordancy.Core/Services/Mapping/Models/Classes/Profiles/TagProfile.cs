@@ -9,16 +9,16 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-namespace TheMeaningDiscordancy.Core.Models.Utilities;
+using AutoMapper;
+using TheMeaningDiscordancy.Core.Models.Tag.Dtos;
+using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
-public class ImageData
+namespace TheMeaningDiscordancy.Core.Services.Mapping.Models.Classes.Profiles;
+
+public class TagProfile : Profile
 {
-    public string? ImageName { get; set; }
-    public string? ImagePath { get; set; }
-    public ImageData() { }
-    public ImageData(string? imageName, string? imagePath)
+    public TagProfile()
     {
-        ImageName = imageName;
-        ImagePath = imagePath;
+        CreateMap<TagDto, TagEfc>();
     }
 }

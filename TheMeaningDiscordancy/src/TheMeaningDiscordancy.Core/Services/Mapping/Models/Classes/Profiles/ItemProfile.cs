@@ -9,13 +9,16 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-using TheMeaningDiscordancy.Core.Models.Item;
+using AutoMapper;
+using TheMeaningDiscordancy.Core.Models.Item.Dtos;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 
-namespace TheMeaningDiscordancy.Core.Services.Interfaces;
+namespace TheMeaningDiscordancy.Core.Services.Mapping.Models.Classes.Profiles;
 
-public interface IItemMappingService
+public class ItemProfile : Profile
 {
-    void MapDtoToEntity<TDto, TEntity>(TDto dto, ItemEfc entity)
-        where TDto : IItemMap;
+    public ItemProfile()
+    {
+        CreateMap<ItemDto, ItemEfc>();
+    }
 }

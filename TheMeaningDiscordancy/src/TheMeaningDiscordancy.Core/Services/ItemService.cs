@@ -9,10 +9,11 @@
 // GitHub: https://github.com/peterss7  
 // LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
+using Microsoft.EntityFrameworkCore.Metadata;
 using TheMeaningDiscordancy.Core.Models.Errors;
 using TheMeaningDiscordancy.Core.Models.Item.Dtos;
-using TheMeaningDiscordancy.Core.Models.Utilities;
 using TheMeaningDiscordancy.Core.Services.Interfaces;
+using TheMeaningDiscordancy.Core.Services.Mapping.Interfaces;
 using TheMeaningDiscordancy.Infrastructure.Models.Entities;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
@@ -22,15 +23,15 @@ public class ItemService : IItemService
 {
     private readonly IRepositoryWrapper _repository;
     private readonly IImageUtilityService _imageUtilityService;
-    private readonly IItemMappingService _mapper;
+    private readonly IMapperWrapper _mapper;
     private readonly ILogger<ItemService> _logger;
 
-    public ItemService(IRepositoryWrapper repository,
+    public ItemService(IItemRepository itemRepository,
         IImageUtilityService imageUtilityService,
-        IItemMappingService mapper,
+        IMapperWrapper mapper,
         ILogger<ItemService> logger)
     {
-        _repository = repository;
+        _itemRepository = itemRepository;
         _imageUtilityService = imageUtilityService;
         _mapper = mapper;
         _logger = logger;
@@ -42,7 +43,7 @@ public class ItemService : IItemService
 
         try
         {
-            ItemEfc? item = await _repository.ItemRepository.GetAsync(id);
+            ItemEfc item = await _repository.ItemRepository.GetAsync(id) ?? new();
             if (item == null)
             {
                 _logger.LogError($"Id {id} item could not be found.");
@@ -92,25 +93,33 @@ public class ItemService : IItemService
             {
                 result.Errors.Add(new DiscordError(BaseDiscordError.NullInput, "Image data is null."));
             }
-            ItemEfc item = new();
-            _mapper.MapDtoToEntity<ItemDto, ItemEfc>(inputDto, item);
-            DiscordResult<ImageData> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image!);
+
+            ItemEfc item = _mapper.ItemMapper.MapToEntity(inputDto);
+            DiscordResult<ImageDataEfc> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image!);
 
             if (imageDataResult.HasError)
             {
                 return result;
             }
 
-            if (imageDataResult.Value == null)
+            ImageDataEfc imageData = imageDataResult?.Value ?? new ImageDataEfc();
+
+            if (imageData == null || imageData.ObjectKey.Equals(Guid.Empty))
             {
                 result.Errors.Add(new DiscordError(BaseDiscordError.NullImageResult, "Image in input object is null."));
+                return result;
             }
 
-            ImageData? imageData = imageDataResult?.Value;
-            _logger.LogWarning($"Name: {imageData?.ImageName}, path: {imageData?.ImagePath}");
-            item.ImageName = imageData?.ImageName!;
-            item.ImagePath = imageData?.ImagePath!;
-            item.ItemId = newId;
+
+            _logger.LogCritical($"ImageData: {imageData?.ImagePath}, {imageData?.ImageName}");
+
+            item.ImageDataObjectKey = imageData!.ObjectKey;
+
+            
+            await _repository.ImageRepository.CreateAsync(imageData!);
+            await _repository.SaveChangesAsync();
+
+
 
             await _repository.ItemRepository.CreateAsync(item);
             await _repository.ItemRepository.SaveChangesAsync();
@@ -150,8 +159,8 @@ public class ItemService : IItemService
 
             ItemEfc item = itemResult.Value;
 
-            _mapper.MapDtoToEntity<ItemDto, ItemEfc>(inputDto, item);
-            DiscordResult<ImageData> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image);
+            _mapper.ItemMapper.MapOntoEntity(inputDto, item);
+            DiscordResult<ImageDataEfc> imageDataResult = await _imageUtilityService.SaveImageAsync(inputDto.Image);
 
             if (imageDataResult.HasError)
             {
@@ -165,10 +174,11 @@ public class ItemService : IItemService
                 return result;
             }
 
-            ImageData imageData = imageDataResult.Value;
+            ImageDataEfc imageData = imageDataResult.Value;
 
-            item.ImageName = imageData.ImageName!;
-            item.ImagePath = imageData.ImagePath!;
+            await _repository.ImageRepository.CreateAsync(imageData); 
+
+            item.ImageDataObjectKey = imageData.ObjectKey;
 
             _repository.ItemRepository.Update(item);
             await _repository.ItemRepository.SaveChangesAsync();

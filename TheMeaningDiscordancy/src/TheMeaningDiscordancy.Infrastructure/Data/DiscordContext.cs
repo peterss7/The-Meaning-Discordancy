@@ -28,6 +28,7 @@ public class DiscordContext : DbContext
     public DbSet<TagEfc> Tags { get; set; }
     public DbSet<ThemeEfc> Themes { get; set; }
     public DbSet<SeedEfc> Seeds { get; set; }
+    public DbSet<ImageDataEfc> ImageData { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

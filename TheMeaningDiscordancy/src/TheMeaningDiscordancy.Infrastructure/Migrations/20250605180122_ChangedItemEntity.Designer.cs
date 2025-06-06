@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheMeaningDiscordancy.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TheMeaningDiscordancy.Infrastructure.Data;
 namespace TheMeaningDiscordancy.Infrastructure.Migrations
 {
     [DbContext(typeof(DiscordContext))]
-    partial class DiscordContextModelSnapshot : ModelSnapshot
+    [Migration("20250605180122_ChangedItemEntity")]
+    partial class ChangedItemEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,28 +71,6 @@ namespace TheMeaningDiscordancy.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Items");
-                });
-
-            modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.SeedEfc", b =>
-                {
-                    b.Property<Guid>("ObjectKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SeedId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ObjectKey");
-
-                    b.ToTable("Seeds");
                 });
 
             modelBuilder.Entity("TheMeaningDiscordancy.Infrastructure.Models.Entities.TagEfc", b =>

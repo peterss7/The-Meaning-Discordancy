@@ -7,4 +7,5 @@ public interface IRepositoryWrapper
     ISeedRepository SeedRepository { get; }
     IThemeRepository ThemeRepository { get; }
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
+    IImageDataRepository ImageRepository { get; }
 }
