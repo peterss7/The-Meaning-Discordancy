@@ -1,5 +1,6 @@
 from db import db
 
+
 class SimilarityDataModel(db.Model):
     __tablename__ = "similarity_data"
 

@@ -10,3 +10,4 @@
 # LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
 from .similarity_schema import SimilaritySchema, SimilarityInputSchema
+from .seed_schema import SeedSchema 

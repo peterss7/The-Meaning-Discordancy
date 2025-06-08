@@ -1,4 +1,4 @@
 {
-    "python.analysis.extraPaths": [
-    ],
+    "python.defaultInterpreterPath": "${workspaceFolder}/nlp/.venv/Scripts/python.exe",
+    "python.analysis.extraPaths": ["${workspaceFolder}/nlp"]
 }

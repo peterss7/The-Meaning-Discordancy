@@ -18,7 +18,8 @@ from flask import Flask
 from flask_smorest import Api
 
 from resources import blp as SimilarityBlueprint
-
+from db import db
+from seed_db import seed_db_data
 
 def create_app():
     app = Flask(__name__)
@@ -31,9 +32,16 @@ def create_app():
     app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
+    # Initialize Database
+    db.init_app(app)
+    
     # Wrap with API
     api = Api(app)
     api.register_blueprint(SimilarityBlueprint)
+    
+    with app.app_context():
+        db.create_all()
+        seed_db_data()
 
     return app
 
