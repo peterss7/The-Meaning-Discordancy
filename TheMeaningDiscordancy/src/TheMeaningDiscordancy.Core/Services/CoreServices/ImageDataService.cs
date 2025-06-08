@@ -44,8 +44,15 @@ public class ImageDataService : BaseDiscordService<ImageDataDto, ImageDataEfc>, 
                 return result;
             }
 
-            ImageDataDto imageDataDto = imageDataResult.Value;            
+            ImageDataDto imageDataDto = imageDataResult.Value;
+
+            List<ImageDataEfc> savedImageData = await _repository.GetAllAsync();
+
+            int newId = savedImageData.Count > 0 ?
+                savedImageData.Select(x => x.ImageDataId).ToList().Max() + 1 :
+                1;
             ImageDataEfc imageData = _mapper.MapToEntity(imageDataDto);
+            imageData.ImageDataId = newId;
 
             await _repository.CreateAsync(imageData);
             await _repository.SaveChangesAsync();
@@ -57,6 +64,32 @@ public class ImageDataService : BaseDiscordService<ImageDataDto, ImageDataEfc>, 
         {
             _logger.LogError(ex, "An error occurred in the CreateAsync method of Image Data Service");
             result.Errors.Add(new DiscordError(BaseDiscordError.ExceptionError, ex.Message));
+        }
+
+        return result;
+    }
+
+    public override async Task<DiscordResult<ImageDataEfc>> GetAsync(int id)
+    {
+        DiscordResult<ImageDataEfc> result = new();
+
+        try
+        {
+            ImageDataEfc? entity = (await _repository.GetAllAsync()).FirstOrDefault(x => x.ImageDataId == id);
+
+            if (entity == null)
+            {
+                _logger.LogDebug("No ImageData of id {Id} was found...", id);
+                return result;
+            }
+
+            result.Value = entity;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred in the ImageDataService GetAsync...");
+            result.Errors.Add(new DiscordError(BaseDiscordError.ExceptionError, "An error occurred in the ImageDataService GetAsync..."));
+            return result;
         }
 
         return result;

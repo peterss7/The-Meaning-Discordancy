@@ -46,6 +46,8 @@ public class ImageUtilityService : IImageUtilityService
             string fileName = $"{Guid.NewGuid()}_{file.FileName.Substring(0, file.FileName.LastIndexOf('.'))}{Path.GetExtension(file.FileName)}";
             string filePath = Path.Combine(targetFolder, fileName);
 
+            _logger.LogCritical("The created filename: {FileName}", fileName);
+
             if (fileName.IsNullOrEmpty() || filePath.IsNullOrEmpty())
             {
                 result.Errors.Add(new DiscordError(BaseDiscordError.NullImageResult, "Image in utility missing filepath or name data."));
@@ -58,7 +60,7 @@ public class ImageUtilityService : IImageUtilityService
             }
             result.Value = new ImageDataDto()
             {
-                ImageName = file.Name,
+                ImageName = fileName,
                 ImagePath = filePath,
             };
         }
