@@ -14,6 +14,15 @@ from marshmallow import Schema, fields
 
 class SeedSchema(Schema):
     object_key = fields.Str(required=True)
+    seed_id = fields.Number(required=True)
+    name = fields.Str(required=True)
+    order_axis_pos = fields.Float(required=True)
+    creation_axis_pos = fields.Float(required=True)
+    divine_axis_pos = fields.Float(required=True)
+    unity_axis_pos = fields.Float(required=True)
+
+class SeedDtoSchema(Schema):
+    seed_id = fields.Number(required=True)
     name = fields.Str(required=True)
     order_axis_pos = fields.Float(required=True)
     creation_axis_pos = fields.Float(required=True)
