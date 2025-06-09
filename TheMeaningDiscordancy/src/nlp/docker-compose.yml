@@ -20,7 +20,7 @@ services:
       - db
     environment:
       SQLALCHEMY_DATABASE_URI: >
-        mssql+pyodbc://${DB_USER}:${SA_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?driver=${SQL_DRIVER}
+       mssql+pyodbc://sa:123Abc!!!@db:1433/TheMeaningDiscordancyDB?driver=ODBC+Driver+17+for+SQL+Server&TrustServerCertificate=yes
     ports:
       - "5000:5000"
     command: ["python", "app.py"]

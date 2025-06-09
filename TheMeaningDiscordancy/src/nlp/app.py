@@ -37,19 +37,24 @@ def create_database_if_not_exists():
     db_port = os.getenv("DB_PORT")
 
     # Connect to the master DB first
-    master_uri = (
-        f"mssql+pyodbc://{db_user}:{password}@{db_host}:{db_port}/master"
-        f"?driver={driver}"
+    db_uri = (
+        "mssql+pyodbc://sa:123Abc!!!@db:1433/master"
+        "?driver=ODBC+Driver+17+for+SQL+Server&TrustServerCertificate=yes"
     )
 
-    engine = create_engine(master_uri)
+    engine = create_engine(db_uri)
     
     # Check and create DB if not exists
     with engine.connect() as conn:
         conn.execution_options(isolation_level="AUTOCOMMIT")
-        result = conn.execute(
-            text(f"IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = '{db_name}') CREATE DATABASE [{db_name}];")
-        )
+        print("CREATE DB")
+        result = conn.execute(text("""
+            IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'TheMeaningDiscordancyDB')
+            BEGIN
+                CREATE DATABASE [TheMeaningDiscordancyDB];
+                ALTER AUTHORIZATION ON DATABASE::[TheMeaningDiscordancyDB] TO sa;
+            END
+        """))
         conn.commit()
 
 
@@ -67,16 +72,11 @@ def create_app():
     app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
-
-    # Build the SQLAlchemy DB URI from .env vars
-    password = quote_plus(os.getenv("SA_PASSWORD"))
-    driver = quote_plus(os.getenv("SQL_DRIVER"))
 
     # Initialize Database
     db_uri = (
-        f"mssql+pyodbc://{os.getenv('DB_USER')}:{password}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/"
-        f"{os.getenv('DB_NAME')}?driver={driver}"
+        "mssql+pyodbc://sa:123Abc!!!@db:1433/TheMeaningDiscordancyDB"
+        "?driver=ODBC+Driver+17+for+SQL+Server&TrustServerCertificate=yes"
     )
     app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 
@@ -97,4 +97,4 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
