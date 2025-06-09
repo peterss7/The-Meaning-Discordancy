@@ -1,0 +1,100 @@
+{
+    "editor.autoClosingQuotes": "never",
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": true,
+    "editor.fontSize": 20,
+    "editor.unicodeHighlight.allowedCharacters": {
+        "’": true
+    },
+    "files.autoSave": "afterDelay",
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "prettier-eslint-typescript"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "problems.showCurrentInStatus": true,
+    "problems.autoReveal": false,
+    "[jsonc]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "prettier-eslint-typescript.prettierOptions": {
+        "bracketSpacing": true,
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "jsxSingleQuote": false,
+        "tabWidth": 4,
+        "useTabs": true,
+    },
+    "workbench.colorCustomizations": {},
+    "background.enabled": true,
+    "background.backgroundSize": [
+        "Manual",
+        "Contain",
+        "Manual",
+        "Cover"
+    ],
+    "background.windowBackgrounds": [
+        "c:/Users/peter/OneDrive/Desktop/MyStuff/Pictures/XXX/editing/creations/boobie chain.png"
+    ],
+    "background.backgroundAlignment": [
+        "Top Center",
+        "Bottom Center",
+        "Center Center",
+        "Center Center"
+    ],
+    "background.sidebarBackgrounds": [
+        "c:/Users/peter/OneDrive/Desktop/MyStuff/Pictures/XXX/editing/no bg/teen/2-teen_no_bg.png"
+    ],
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "background.backgroundOpacity": [
+        0.07,
+        0.1,
+        0.2,
+        0.1
+    ],
+    "explorer.confirmDragAndDrop": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "background.editorBackgrounds": [
+        "c:/Users/peter/OneDrive/Desktop/MyStuff/Pictures/XXX/editing/masterpiece no bg/purple-naked-boob-mouth-lady.png"
+    ],
+    "background.backgroundSizeValue": [
+        "50%",
+        "75%",
+        "90%",
+        "100%"
+    ],
+    "background.backgroundRepeat": [
+        "Repeat X",
+        "Repeat X",
+        "No Repeat",
+        "No Repeat"
+    ],
+    "background.autoInstall": false,
+    "background.panelBackgrounds": [
+        "c:/Users/peter/OneDrive/Desktop/MyStuff/Pictures/XXX/editing/no bg/goddess/10-goth-removebg-preview2.png"
+    ],
+    "python.createEnvironment.trigger": "off",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "settingsSync.ignoredExtensions": [
+        "kevinrose.vsc-python-indent"
+    ],
+    "python.pydev.askInstallDebugger": false,
+    "workbench.colorTheme": "Radical",
+    "vscode-office.editorTheme": "Monokai",
+    "vscode-office.openOutline": false,
+}
