@@ -20,9 +20,9 @@ Stop-Process -Name python -Force -ErrorAction SilentlyContinue
 Start-Sleep -Milliseconds 500
 
 # Remove old venv
-if (Test-Path ".\venv") {
+if (Test-Path ".\.venv") {
     Write-Host "Removing old virtual environment..."
-    Remove-Item -Recurse -Force ".\venv"
+    Remove-Item -Recurse -Force ".\.venv"
 }  
 
 # Clean __pycache__ and .pyc files
@@ -31,11 +31,13 @@ Get-ChildItem -Recurse -Include "__pycache__", "*.pyc" -ErrorAction SilentlyCont
 
 # Recreate venv
 Write-Host "Creating new virtual environment..."
-python -m venv venv
+python -m venv .venv
 
 Write-Host "📦 Installing dependencies..."
 & .\venv\Scripts\python.exe -m pip install --upgrade pip
 & .\venv\Scripts\python.exe -m pip install -r requirements.txt
 
+# Activate venv
+& .\.venv\Scripts\Activate.ps1
+
 Write-Host "✅ Reinstall complete."
-Write-Host "👉 To activate the environment, run: .\venv\Scripts\Activate.ps1"

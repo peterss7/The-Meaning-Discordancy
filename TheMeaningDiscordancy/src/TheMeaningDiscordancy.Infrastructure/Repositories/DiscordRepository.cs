@@ -1,51 +1,55 @@
-﻿// Copyright © 2025 Steven Peterson
-// All rights reserved.  
-// 
-// No part of this code may be copied, modified, distributed, or used  
-// without explicit written permission from the author.
-// 
-// For licensing inquiries or collaboration opportunities:
-// 
-// GitHub: https://github.com/peterss7  
-// LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
-
+﻿using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TheMeaningDiscordancy.Infrastructure.Data;
 using TheMeaningDiscordancy.Infrastructure.Repositories.Interfaces;
 
 namespace TheMeaningDiscordancy.Infrastructure.Repositories;
 
-public class DiscordRepository<T> : IDiscordRepository<T> where T : class
+public class DiscordRepository : IRepositoryWrapper
 {
-    public Task CreateAsync(T entity)
+    private readonly DiscordContext _context;
+    private IItemRepository _itemRepository;
+    private ITagRepository _tagRepository;
+    private readonly ILogger<IRepositoryWrapper> _logger;
+
+    public DiscordRepository(DiscordContext context,
+        ILogger<IRepositoryWrapper> logger)
     {
-        throw new NotImplementedException();
+        _context = context;
+        _logger = logger;
     }
 
-    public Task CreateAsync(List<T> entities)
+    public IItemRepository ItemRepository
     {
-        throw new NotImplementedException();
+        get
+        {
+            if (_itemRepository == null)
+            {
+                _itemRepository = new ItemRepository(_context, _logger);
+            }
+
+            return _itemRepository;
+        }
     }
 
-    public void Delete(T entity)
+    public ITagRepository TagRepository
     {
-        throw new NotImplementedException();
+        get
+        {
+            if (_tagRepository == null)
+            {
+                _tagRepository = new TagRepository(_context, _logger);
+            }
+            return _tagRepository;
+        }
     }
 
-    public Task<List<T>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task<T?> GetAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task SaveChangesAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(T entity)
+    public void save()
     {
         throw new NotImplementedException();
     }

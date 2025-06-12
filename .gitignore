@@ -369,3 +369,4 @@ FodyWeavers.xsd
 /TheMeaningDiscordancy/src/nlp/README-Template.md
 /header_backups/header_backups/TheMeaningDiscordancy/src/client/storybook-static
 /TheMeaningDiscordancy/src/TheMeaningDiscordancy.Api/wwwroot/seeds
+/TheMeaningDiscordancy/src/nlp/.venv

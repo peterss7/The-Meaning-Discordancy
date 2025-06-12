@@ -15,5 +15,4 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.5" />
   </ItemGroup>
-
 </Project>

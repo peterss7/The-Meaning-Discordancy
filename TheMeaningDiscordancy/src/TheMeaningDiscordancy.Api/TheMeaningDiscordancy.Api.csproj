@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TheMeaningDiscordancy.Core\TheMeaningDiscordancy.Core.csproj" />
     <ProjectReference Include="..\TheMeaningDiscordancy.Infrastructure\TheMeaningDiscordancy.Infrastructure.csproj" />
   </ItemGroup>
