@@ -9,4 +9,5 @@
 # GitHub: https://github.com/peterss7  
 # LinkedIn: https://www.linkedin.com/in/steven-peterson7405926/
 
-from .similarity_resource import blp
+from .similarity_resource import blp  as SimilarityBlueprint
+from .seed_resource import blp as SeedBlueprint

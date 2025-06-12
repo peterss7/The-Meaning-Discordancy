@@ -8,7 +8,7 @@ if (-Not (Test-Path ".\.venv")) {
 }
 
 # Activate venv
-& .\.venv\Scripts\Activate.ps1
+& .\.venv\Scripts\Activate
 
 # Install dependencies
 Write-Host "📦 Installing dependencies..."

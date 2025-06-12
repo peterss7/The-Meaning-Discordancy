@@ -1,3 +1,6 @@
+# run.ps1
+$scriptPath = Resolve-Path "$scriptPath\.."
+$projectRoot = Split-Path -Parent #
 # Exit on error
 $ErrorActionPreference = "Stop"
 
