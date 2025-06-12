@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    environment:
+      SA_PASSWORD: "${SA_PASSWORD}"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "${DB_PORT}:1433"
+    volumes:
+      - mssqldata:/var/opt/mssql
+
+  nlp:
+    build:
+      context: .
+    container_name: nlp
+    depends_on:
+      - db
+    environment:
+      SQLALCHEMY_DATABASE_URI: >
+       mssql+pyodbc://sa:123Abc!!!@db:1433/TheMeaningDiscordancyDB?driver=ODBC+Driver+17+for+SQL+Server&TrustServerCertificate=yes
+    ports:
+      - "5000:5000"
+    command: ["python", "app.py"]
+
+volumes:
+  mssqldata:
